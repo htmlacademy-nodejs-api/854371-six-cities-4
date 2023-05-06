@@ -36,6 +36,7 @@ export type RentalOffer = {
   type: HouseType;
   roomsCounter: number;
   guestsCounter: number;
+  cost: number;
   amenities: Amenity[];
   userId: number;
   numberComments: number;

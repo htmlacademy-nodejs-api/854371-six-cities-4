@@ -22,7 +22,7 @@ export default class TsvFileReader implements FileReaderInterface {
     return lines
       .filter((line) => line !== '')
       .map((line) => line.split('\t'))
-      .map(([title, description, publishDate, city, previewImage, mainImages, isPremium, isFavorite, rating, type, roomsCounter, guestsCounter, amenities, userId, numberComments, coordinates]) => {
+      .map(([title, description, publishDate, city, previewImage, mainImages, isPremium, isFavorite, rating, type, roomsCounter, guestsCounter, cost, amenities, userId, numberComments, coordinates]) => {
         const coordinatesArray = coordinates.split(';').map((coordinate) => parseFloat(coordinate));
         return {
           title,
@@ -31,12 +31,13 @@ export default class TsvFileReader implements FileReaderInterface {
           city: city as Cities,
           previewImage,
           mainImages: mainImages.split(';') as MainImages,
-          isPremium: Boolean(isPremium),
-          isFavorite: Boolean(isFavorite),
+          isPremium: isPremium === 'true',
+          isFavorite: isFavorite === 'true',
           rating: parseFloat(rating),
           type: type as HouseType,
           roomsCounter: parseInt(roomsCounter, 10),
           guestsCounter: parseInt(guestsCounter, 10),
+          cost: parseInt(cost, 10),
           amenities: amenities.split(';') as Amenity[],
           userId: parseInt(userId, 10),
           numberComments: parseInt(numberComments, 10),
