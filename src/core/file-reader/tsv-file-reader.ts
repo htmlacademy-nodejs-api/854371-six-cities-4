@@ -4,21 +4,21 @@ import path from 'node:path';
 import { Amenity, Cities, HouseType, MainImages, RentalOffer } from '../../types/rental-offer.js';
 
 export default class TsvFileReader implements FileReaderInterface {
-  private readData = '';
+  private fileData = '';
 
   constructor(public fileName: string) {
   }
 
   public read() {
-    this.readData = readFileSync(path.resolve(this.fileName), {encoding: 'utf-8'});
+    this.fileData = readFileSync(path.resolve(this.fileName), {encoding: 'utf-8'});
   }
 
   public toArray(): RentalOffer[] {
-    if (!this.readData) {
+    if (!this.fileData) {
       return [];
     }
 
-    const lines = this.readData.split('\n');
+    const lines = this.fileData.split('\n');
     return lines
       .filter((line) => line !== '')
       .map((line) => line.split('\t'))

@@ -7,8 +7,8 @@ export default class VersionCommand implements CliCommandInterface {
 
   private readVersion(): string {
     const contentPageJSON = readFileSync(path.resolve('./package.json'), 'utf-8');
-    const objecrFormJSON = JSON.parse(contentPageJSON);
-    return objecrFormJSON.version;
+    const objectFormJSON = JSON.parse(contentPageJSON);
+    return objectFormJSON.version;
   }
 
   public async execute(): Promise<void> {
