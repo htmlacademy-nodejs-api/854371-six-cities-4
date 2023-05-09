@@ -1,4 +1,5 @@
 import TsvFileReader from '../file-reader/tsv-file-reader.js';
+import chalk from 'chalk';
 
 export default class ImportCommand {
   public readonly name = '--import';
@@ -14,7 +15,7 @@ export default class ImportCommand {
         throw err;
       }
 
-      console.log(`Не удалось импортировать данные из файла по причине: «${err.message}»`);
+      console.log(chalk.bgYellow(`Не удалось импортировать данные из файла по причине: «${err.message}»`));
     }
   }
 }
