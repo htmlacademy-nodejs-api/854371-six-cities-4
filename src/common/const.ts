@@ -1,4 +1,6 @@
-export const CitiesLocation = {
+import { Coordinates } from '../types/rental-offer.js';
+
+export const CitiesLocation: Record<string, Coordinates> = {
   Paris: {
     latitude: 48.85661,
     longitude: 2.351499

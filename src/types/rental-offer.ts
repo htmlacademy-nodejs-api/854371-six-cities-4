@@ -16,7 +16,7 @@ export type Amenity =
   | 'Towels'
   | 'Fridge';
 
-type Coordinates = {
+export type Coordinates = {
   latitude: number;
   longitude: number;
 };
