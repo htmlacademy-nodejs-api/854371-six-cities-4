@@ -14,3 +14,10 @@ export function getRandomItem<T>(items: T[]): T {
 
   return items[index];
 }
+
+const counter = (start: number) => () => start++;
+const counterId = counter(0);
+
+export function getStringUserId(): string {
+  return counterId().toString();
+}
