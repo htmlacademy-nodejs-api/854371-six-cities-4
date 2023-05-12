@@ -1,21 +1,29 @@
 import TsvFileReader from '../file-reader/tsv-file-reader.js';
-import chalk from 'chalk';
+import { createOffer } from '../../common/offers.js';
+import { getErrorMessage } from '../../common/utils.js';
 
 export default class ImportCommand {
   public readonly name = '--import';
 
-  public execute(pathToFile: string) {
+  private oneLine(line: string) {
+    const offer = createOffer(line);
+    console.log(offer);
+  }
+
+  private onComlete(count: number) {
+    console.log(`${count} rows imported`);
+  }
+
+  public async execute(pathToFile: string): Promise<void> {
     const fileReader = new TsvFileReader(pathToFile.trim());
+
+    fileReader.on('line', this.oneLine);
+    fileReader.on('end', this.onComlete);
+
     try {
-      fileReader.read();
-      console.log(fileReader.toArray());
-    } catch (err) {
-
-      if (!(err instanceof Error)) {
-        throw err;
-      }
-
-      console.log(chalk.bgYellow(`Не удалось импортировать данные из файла по причине: «${err.message}»`));
+      await fileReader.read();
+    } catch (error) {
+      console.log(`Can't read the file: ${getErrorMessage(error)}`);
     }
   }
 }

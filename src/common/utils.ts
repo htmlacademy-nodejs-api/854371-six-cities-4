@@ -21,3 +21,10 @@ const counterId = counter(1);
 export function getStringUserId(): string {
   return counterId().toString();
 }
+
+export function getErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return 'Unknown Error';
+}
