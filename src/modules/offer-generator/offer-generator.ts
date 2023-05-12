@@ -2,12 +2,21 @@ import { OfferGeneratorInterface } from './offer-generator.interface.js';
 import { MockData } from '../../types/mock-data.js';
 import { getRandomItem, getRandomItems, getRandomValue, getStringUserId } from '../../common/utils.js';
 import {
-  CitiesLocation, FIRST_WEEK_DAY, LAST_WEEK_DAY,
+  CitiesLocation,
+  FIRST_WEEK_DAY,
+  LAST_WEEK_DAY,
   MAX_BEDROOMS,
   MAX_COMMENTS_COUNTER,
-  MAX_PRICE_PER_NIGHT, MAX_RANDOM_VALUE_FOR_BOOL, MAX_RATING, MIN_BEDROOMS,
+  MAX_PRICE_PER_NIGHT,
+  MAX_RANDOM_VALUE_FOR_BOOL,
+  MAX_RATING,
+  MIN_BEDROOMS,
   MIN_PRICE_PER_NIGHT,
-  MIN_RANDOM_VALUE, MIN_RATING, MODULO_FOR_GUESTS, MULTIPLIER_FOR_GUESTS, PRICE_MULTIPLIER
+  MIN_RANDOM_VALUE,
+  MIN_RATING,
+  MODULO_FOR_GUESTS,
+  MULTIPLIER_FOR_GUESTS,
+  PRICE_MULTIPLIER
 } from '../../common/const.js';
 import dayjs from 'dayjs';
 
@@ -24,7 +33,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const photoUrls = getRandomItem<string>(this.mockData.photoUrls);
     const isPremium = String(!!getRandomValue(MIN_RANDOM_VALUE, MAX_RANDOM_VALUE_FOR_BOOL));
     const isFavorite = String(!!getRandomValue(MIN_RANDOM_VALUE, MAX_RANDOM_VALUE_FOR_BOOL));
-    const rating = String(!!getRandomValue(MIN_RATING, MAX_RATING));
+    const rating = String(getRandomValue(MIN_RATING, MAX_RATING));
     const propertyType = getRandomItem<string>(this.mockData.propertyType);
     const numberOfBedrooms = String(getRandomValue(MIN_BEDROOMS, MAX_BEDROOMS));
     const numberOfGuests = String((+numberOfBedrooms * MULTIPLIER_FOR_GUESTS) % MODULO_FOR_GUESTS);

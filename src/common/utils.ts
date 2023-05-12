@@ -16,7 +16,7 @@ export function getRandomItem<T>(items: T[]): T {
 }
 
 const counter = (start: number) => () => start++;
-const counterId = counter(0);
+const counterId = counter(1);
 
 export function getStringUserId(): string {
   return counterId().toString();
