@@ -1,51 +1,36 @@
 import { FileReaderInterface } from './file-reader.interface.js';
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
-import { Amenity, Cities, HouseType, MainImages, RentalOffer } from '../../types/rental-offer.js';
+import EventEmitter from 'node:events';
+import { createReadStream } from 'node:fs';
 
-export default class TsvFileReader implements FileReaderInterface {
-  private readData = '';
+const CHUNK_SIZE = 16184;
 
+export default class TsvFileReader extends EventEmitter implements FileReaderInterface {
   constructor(public fileName: string) {
+    super();
   }
 
-  public read() {
-    this.readData = readFileSync(path.resolve(this.fileName), {encoding: 'utf-8'});
-  }
+  public async read() {
+    const stream = createReadStream(this.fileName, {
+      encoding: 'utf-8',
+      highWaterMark: CHUNK_SIZE,
+    });
 
-  public toArray(): RentalOffer[] {
-    if (!this.readData) {
-      return [];
+    let remainingData = '';
+    let nextLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of stream) {
+      remainingData += chunk.toString();
+
+      while ((nextLinePosition = remainingData.indexOf('\n')) >= 0) {
+        const completeRow = remainingData.slice(0, nextLinePosition + 1);
+        remainingData = remainingData.slice(++nextLinePosition);
+        importedRowCount++;
+
+        this.emit('line', completeRow);
+      }
     }
 
-    const lines = this.readData.split('\n');
-    return lines
-      .filter((line) => line !== '')
-      .map((line) => line.split('\t'))
-      .map(([title, description, publishDate, city, previewImage, mainImages, isPremium, isFavorite, rating, type, roomsCounter, guestsCounter, cost, amenities, userId, numberComments, coordinates]) => {
-        const coordinatesArray = coordinates.split(';').map((coordinate) => parseFloat(coordinate));
-        return {
-          title,
-          description,
-          publishDate: new Date(publishDate),
-          city: city as Cities,
-          previewImage,
-          mainImages: mainImages.split(';') as MainImages,
-          isPremium: isPremium === 'true',
-          isFavorite: isFavorite === 'true',
-          rating: parseFloat(rating),
-          type: type as HouseType,
-          roomsCounter: parseInt(roomsCounter, 10),
-          guestsCounter: parseInt(guestsCounter, 10),
-          cost: parseInt(cost, 10),
-          amenities: amenities.split(';') as Amenity[],
-          userId: parseInt(userId, 10),
-          numberComments: parseInt(numberComments, 10),
-          coordinates: {
-            latitude: coordinatesArray[0],
-            longitude: coordinatesArray[1]
-          }
-        };
-      });
+    this.emit('end', importedRowCount);
   }
 }
