@@ -19,10 +19,10 @@ export default class GenerateCommand implements CliCommandInterface {
       return;
     }
 
-    const offerGeneratorString = new OfferGenerator(this.initialData);
+    const offerGenerator = new OfferGenerator(this.initialData);
     const tsvFileWriter = new TSVFileWriter(filepath);
     for (let i = 0; i < offerCount; i++) {
-      await tsvFileWriter.write(offerGeneratorString.generate());
+      await tsvFileWriter.write(offerGenerator.generate());
     }
 
     console.log(`File ${filepath} was created!`);
