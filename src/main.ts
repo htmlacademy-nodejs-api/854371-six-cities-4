@@ -4,12 +4,9 @@ import ConfigService from './core/config/config.service.js';
 
 async function bootstrap() {
   const logger = new PinoService();
-  const application = new RestApplication(logger);
-  const config = new ConfigService(process.env);
-  const port = config.get('PORT');
-
+  const config = new ConfigService(logger);
+  const application = new RestApplication(logger, config);
   await application.init();
-  logger.info(String(port));
 }
 
 bootstrap();
