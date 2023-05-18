@@ -1,10 +1,15 @@
 import { config, DotenvParseOutput } from 'dotenv';
 import { ConfigInterface, ConstEnv } from './config.interface.js';
 import { LoggerInterface } from '../logger/logger.interface.js';
+import { inject, injectable } from 'inversify';
+import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 
+@injectable()
 export default class ConfigService implements ConfigInterface {
   private readonly config: NodeJS.ProcessEnv;
-  constructor(private logger: LoggerInterface) {
+  constructor(
+    @inject(APPLICATION_DEPENDENCIES.LoggerInterface) private logger: LoggerInterface
+  ) {
     const parsedOutput = config({path: './src/.env'});
 
     if (!parsedOutput.parsed) {
