@@ -1,6 +1,5 @@
 import { FileWriterInterface } from './file-writer.interface.js';
-import { WriteStream } from 'node:fs';
-import { createWriteStream } from 'node:fs';
+import { createWriteStream, WriteStream } from 'node:fs';
 
 const CHUNK_SIZE = 65536;
 

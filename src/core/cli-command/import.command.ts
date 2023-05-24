@@ -10,7 +10,7 @@ export default class ImportCommand {
     console.log(offer);
   }
 
-  private onComlete(count: number) {
+  private onComplete(count: number) {
     console.log(`${count} rows imported`);
   }
 
@@ -18,7 +18,7 @@ export default class ImportCommand {
     const fileReader = new TsvFileReader(pathToFile.trim());
 
     fileReader.on('line', this.oneLine);
-    fileReader.on('end', this.onComlete);
+    fileReader.on('end', this.onComplete);
 
     try {
       await fileReader.read();

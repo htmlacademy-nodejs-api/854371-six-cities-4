@@ -1,4 +1,4 @@
-import {RentalOffer} from '../types/rental-offer.js';
+import { RentalOffer } from '../types/rental-offer.js';
 
 export function createOffer(offerData: string): RentalOffer {
   const [

@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { ConfigInterface} from './config.interface.js';
+import { ConfigInterface } from './config.interface.js';
 import { LoggerInterface } from '../logger/logger.interface.js';
 import { inject, injectable } from 'inversify';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
