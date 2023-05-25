@@ -1,8 +1,8 @@
 import { DatabaseClientInterface } from './database-client.interface';
 import mongoose, { Mongoose } from 'mongoose';
 import { inject, injectable } from 'inversify';
-import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies';
 import { LoggerInterface } from '../logger/logger.interface';
+import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 
 @injectable()
 export default class MongoClientService implements DatabaseClientInterface {
