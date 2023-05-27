@@ -1,4 +1,6 @@
 import { CitiesLocation } from '../common/const.js';
+import { Ref } from '@typegoose/typegoose';
+import { UserEntity } from '../modules/user/user.entity.js';
 
 export type Cities = keyof typeof CitiesLocation;
 export type HouseType =
@@ -38,7 +40,7 @@ export type RentalOffer = {
   guestsCounter: number;
   cost: number;
   amenities: Amenity[];
-  userId: number;
+  userId: Ref<UserEntity>;
   numberComments: number;
   coordinates: Coordinates;
 }
