@@ -1,6 +1,6 @@
 import { OfferGeneratorInterface } from './offer-generator.interface.js';
 import { MockData } from '../../types/mock-data.js';
-import { getRandomItem, getRandomItems, getRandomValue, getStringUserId } from '../../common/utils.js';
+import { getRandomItem, getRandomItems, getRandomValue } from '../../common/utils.js';
 import {
   CitiesLocation,
   FIRST_WEEK_DAY,
@@ -39,11 +39,10 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const numberOfGuests = String((+numberOfBedrooms * MULTIPLIER_FOR_GUESTS) % MODULO_FOR_GUESTS);
     const pricePerNight = String(getRandomValue(MIN_PRICE_PER_NIGHT, MAX_PRICE_PER_NIGHT) * PRICE_MULTIPLIER);
     const amenities = getRandomItems<string>(this.mockData.amenities).join(';');
-    const userId = getStringUserId();
     const commentsCounter = getRandomValue(MIN_RANDOM_VALUE, MAX_COMMENTS_COUNTER);
     const coordinates = [CitiesLocation[city].latitude, CitiesLocation[city].longitude].join(';');
 
     return [title, description, date, city, previewUrl, photoUrls, isPremium, isFavorite, rating, propertyType,
-      numberOfBedrooms, numberOfGuests, pricePerNight, amenities, userId, commentsCounter, coordinates].join('\t');
+      numberOfBedrooms, numberOfGuests, pricePerNight, amenities, commentsCounter, coordinates].join('\t');
   }
 }

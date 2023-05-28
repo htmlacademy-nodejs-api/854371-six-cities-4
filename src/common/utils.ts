@@ -17,13 +17,6 @@ export function getRandomItem<T>(items: T[]): T {
   return items[index];
 }
 
-const counter = (start: number) => () => start++;
-const counterId = counter(1);
-
-export function getStringUserId(): string {
-  return counterId().toString();
-}
-
 export function getErrorMessage(error: unknown) {
   if (error instanceof Error) {
     return error.message;
