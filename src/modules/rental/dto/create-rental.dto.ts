@@ -8,7 +8,7 @@ export default class CreateRentalDto {
   public isPremium!: boolean;
   public isFavorite!: boolean;
   public rating!: number;
-  public type!: boolean;
+  public type!: string;
   public roomsCounter!: number;
   public guestsCounter!: number;
   public cost!: number;

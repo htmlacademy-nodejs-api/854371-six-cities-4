@@ -1,4 +1,5 @@
 import { getRandomItem } from './utils.js';
+import { AutoUserType } from '../types/autoUser.js';
 
 const emailAddresses = [
   'john@gmail.com',
@@ -27,11 +28,11 @@ function getRandomEmail(): string {
   return getRandomItem<string>(emailAddresses);
 }
 
-function createUserAvatar() {
+function createUserAvatar(): string {
   return `https://api.dicebear.com/6.x/avataaars/jpg?seed=${Math.round(Math.random() * 100000)}`;
 }
 
-const autoUser = {
+const autoUser: AutoUserType = {
   password: 'pass123456',
   avatar: createUserAvatar(),
   userType: 'base',
