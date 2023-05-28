@@ -26,7 +26,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   public eMail: string;
   @prop({minlength: 6, maxlength: 12, required: true, default: ''})
   private password?: string = '';
-  @prop({match: REGULAR_EXPRESSION.CheckPhotoPath, default: 'https://api.dicebear.com/6.x/bots/svg'})
+  @prop({match: REGULAR_EXPRESSION.CheckPhotoPath, default: 'https://api.dicebear.com/6.x/bottts/jpg'})
   public avatarUrl: string;
   @prop({enum: UserType, required: true})
   public userType: "base" | "pro";
