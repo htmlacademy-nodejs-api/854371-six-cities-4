@@ -5,5 +5,6 @@ export const APPLICATION_DEPENDENCIES = {
   DatabaseClientInterface: Symbol.for('DatabaseClientInterface'),
   UserServiceInterface: Symbol.for('UserServiceInterface'),
   UserModel: Symbol.for('UserModel'),
+  RentalServiceInterface: Symbol.for('RentalServiceInterface'),
   RentalModel: Symbol.for('RentalModel')
 } as const;
