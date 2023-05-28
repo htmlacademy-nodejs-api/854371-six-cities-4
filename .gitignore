@@ -6,7 +6,7 @@
 /docs/
 .idea/*
 src/test/
-/src/mock/genereted-mock.tsv
+*.tsv
 
 .DS_Store
 coverage

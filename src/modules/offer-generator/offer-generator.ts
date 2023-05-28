@@ -25,6 +25,8 @@ export default class OfferGenerator implements OfferGeneratorInterface {
   }
 
   public generate(): string {
+    const createdAmenities = getRandomItems<string>(this.mockData.amenities).join(';');
+
     const title = getRandomItem<string>(this.mockData.title);
     const description = getRandomItem<string>(this.mockData.description);
     const date = dayjs().subtract(getRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day').toISOString();
@@ -38,7 +40,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const numberOfBedrooms = String(getRandomValue(MIN_BEDROOMS, MAX_BEDROOMS));
     const numberOfGuests = String((+numberOfBedrooms * MULTIPLIER_FOR_GUESTS) % MODULO_FOR_GUESTS);
     const pricePerNight = String(getRandomValue(MIN_PRICE_PER_NIGHT, MAX_PRICE_PER_NIGHT) * PRICE_MULTIPLIER);
-    const amenities = getRandomItems<string>(this.mockData.amenities).join(';');
+    const amenities = createdAmenities ? createdAmenities : 'Washer';
     const commentsCounter = getRandomValue(MIN_RANDOM_VALUE, MAX_COMMENTS_COUNTER);
     const coordinates = [CitiesLocation[city].latitude, CitiesLocation[city].longitude].join(';');
 
