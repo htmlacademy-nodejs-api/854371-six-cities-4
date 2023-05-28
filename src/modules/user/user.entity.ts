@@ -22,9 +22,9 @@ export interface UserEntity extends defaultClasses.Base {}
 export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({required: true, minlength: 1, maxlength: 15, default: ''})
   public name: string;
-  @prop({required: true, match: REGULAR_EXPRESSION.CheckEmail, index: {unique: true}, default: ''})
+  @prop({required: true, unique: true, default: ''})
   public eMail: string;
-  @prop({minlength: 6, maxlength: 12, required: true, default: ''})
+  @prop({required: true, default: ''})
   private password?: string = '';
   @prop({match: REGULAR_EXPRESSION.CheckPhotoPath, default: 'https://api.dicebear.com/6.x/bottts/jpg'})
   public avatarUrl: string;

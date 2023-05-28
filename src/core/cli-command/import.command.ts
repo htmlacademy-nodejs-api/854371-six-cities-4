@@ -32,7 +32,7 @@ export default class ImportCommand {
     this.onComplete = this.onComplete.bind(this);
     this.logger = new PinoService;
     this.userService = new UserService(this.logger, UserModel);
-    this.rentalService = new RentalService(RentalModel);
+    this.rentalService = new RentalService(this.logger, RentalModel);
     this.databaseClient = new MongoClientService(this.logger);
     this.configService = new ConfigService(this.logger);
   }
@@ -50,7 +50,6 @@ export default class ImportCommand {
   private async oneLine(line: string, resolve: () => void) {
     const offer = createOffer(line);
     await this.saveRentalOffer(offer)
-    this.logger.info(`${offer}`);
     resolve();
   }
 
@@ -60,6 +59,7 @@ export default class ImportCommand {
   }
 
   public async execute(pathToFile: string): Promise<void> {
+    this.salt = this.configService.get('SALT');
     const uri = getUri(
       this.configService.get('DB_HOST'),
       this.configService.get('DB_USER'),

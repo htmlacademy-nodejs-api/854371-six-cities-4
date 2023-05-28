@@ -31,6 +31,7 @@ export default class UserService implements UserServiceInterface {
     const existedUser = await this.findByEmail(dto.eMail);
 
     if (existedUser) {
+      this.logger.info(`User with email ${dto.eMail} found.`)
       return existedUser;
     }
 

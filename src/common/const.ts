@@ -43,6 +43,6 @@ export const FIRST_WEEK_DAY = 1;
 export const LAST_WEEK_DAY = 7;
 
 export const REGULAR_EXPRESSION = {
-  CheckEmail: /^[\w.-]+@\w+\.\w+$/,
-  CheckPhotoPath: /.+\.jpg|.+\.png$/
+  CheckEmail: /^[a-zA-Z]*@[a-zA-Z]*$/,
+  CheckPhotoPath: /(\/|[^a-zA-Z])(jpg|png)(\/|[^a-zA-Z])/
 }
