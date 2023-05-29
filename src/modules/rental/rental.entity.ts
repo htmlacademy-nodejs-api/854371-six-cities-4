@@ -77,7 +77,6 @@ export class RentalEntity extends defaultClasses.TimeStamps implements RentalOff
 
   @prop({
     required: true,
-    min: 1,
     max: 10
   })
   public guestsCounter!: number;

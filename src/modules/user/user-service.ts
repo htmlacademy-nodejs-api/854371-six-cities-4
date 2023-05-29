@@ -23,8 +23,10 @@ export default class UserService implements UserServiceInterface {
     return result;
   }
 
-  public async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
-    return this.userModel.findOne({email});
+  public async findByEmail(eMail: string): Promise<DocumentType<UserEntity> | null> {
+    const result = this.userModel.findOne({eMail});
+    this.logger.info(`User with email ${eMail} found in the database.`);
+    return result;
   }
 
   public async findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
