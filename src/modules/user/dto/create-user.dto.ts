@@ -4,4 +4,4 @@ export default class CreateUserDto {
   eMail!: string;
   avatarUrl!: string;
   userType!: 'base' | 'pro';
-};
+}

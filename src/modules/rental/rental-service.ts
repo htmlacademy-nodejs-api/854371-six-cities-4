@@ -14,8 +14,8 @@ export default class RentalService implements RentalServiceInterface {
   ) {}
 
   create(dto: CreateRentalDto): Promise<DocumentType<RentalEntity>> {
-    const result = this.rentalModel.create(dto)
-    this.logger.info(`Rental offer created: ${dto.title}`)
+    const result = this.rentalModel.create(dto);
+    this.logger.info(`Rental offer created: ${dto.title}`);
 
     return result;
   }

@@ -19,7 +19,7 @@ export default class MongoClientService implements DatabaseClientInterface {
   private async _disconnect() {
     await this.mongooseInstance?.disconnect();
     this.mongooseInstance = null;
-    this.logger.info('The disconnection from the database has been completed.')
+    this.logger.info('The disconnection from the database has been completed.');
   }
 
   private async _connectWithRetry(uri: string): Promise<Mongoose> {
@@ -40,7 +40,7 @@ export default class MongoClientService implements DatabaseClientInterface {
 
   public async connect(url: string): Promise<void> {
     if (this.isConnected) {
-      this.logger.error('The connection to the database has already been established.')
+      this.logger.error('The connection to the database has already been established.');
     }
     if (!this.isConnected) {
       this.logger.info('Trying connect');
@@ -52,7 +52,7 @@ export default class MongoClientService implements DatabaseClientInterface {
 
   public async disconnect() {
     if (!this.isConnected) {
-      this.logger.error('The disconnection from the database has already been completed.')
+      this.logger.error('The disconnection from the database has already been completed.');
     }
     if (this.isConnected) {
       await this._disconnect();

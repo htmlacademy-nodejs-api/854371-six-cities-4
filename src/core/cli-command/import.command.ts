@@ -24,7 +24,7 @@ export default class ImportCommand {
   private userService!: UserServiceInterface;
   private rentalService!: RentalServiceInterface;
   private databaseClient!: DatabaseClientInterface;
-  private configService!: ConfigInterface<RestSchema>
+  private configService!: ConfigInterface<RestSchema>;
   private salt!: string;
 
   constructor() {
@@ -44,12 +44,12 @@ export default class ImportCommand {
     await this.rentalService.create({
       ...rentalOffer,
       userId: userFromDatabase.id
-    })
+    });
   }
 
   private async oneLine(line: string, resolve: () => void) {
     const offer = createOffer(line);
-    await this.saveRentalOffer(offer)
+    await this.saveRentalOffer(offer);
     resolve();
   }
 

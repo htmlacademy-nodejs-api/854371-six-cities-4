@@ -25,6 +25,6 @@ export function getErrorMessage(error: unknown) {
 }
 
 export function createSha256(line: string, salt: string) {
-  const shaHasher = crypto.createHmac('sha256', salt)
+  const shaHasher = crypto.createHmac('sha256', salt);
   return shaHasher.update(line).digest('hex');
 }

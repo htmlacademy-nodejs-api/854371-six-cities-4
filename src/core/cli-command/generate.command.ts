@@ -1,4 +1,4 @@
- import { CliCommandInterface } from './cli-command.interface.js';
+import { CliCommandInterface } from './cli-command.interface.js';
 import { MockData } from '../../types/mock-data.js';
 import got from 'got';
 import OfferGenerator from '../../modules/offer-generator/offer-generator.js';

@@ -22,21 +22,25 @@ export interface UserEntity extends defaultClasses.Base {}
 export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({required: true, minlength: 1, maxlength: 15, default: ''})
   public name: string;
+
   @prop({required: true, unique: true, default: ''})
   public eMail: string;
+
   @prop({required: true, default: ''})
   private password?: string = '';
+
   @prop({match: REGULAR_EXPRESSION.CheckPhotoPath, default: 'https://api.dicebear.com/6.x/bottts/jpg'})
   public avatarUrl: string;
+
   @prop({enum: UserType, required: true})
-  public userType: "base" | "pro";
+  public userType: 'base' | 'pro';
 
   constructor(userData: User) {
     super();
     this.name = userData.name;
     this.eMail = userData.eMail;
     this.avatarUrl = userData.avatarUrl;
-    this.userType = userData.userType
+    this.userType = userData.userType;
   }
 
   public setPassword(password: string, salt: string) {
@@ -48,4 +52,4 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   }
 }
 
-export const UserModel = getModelForClass(UserEntity)
+export const UserModel = getModelForClass(UserEntity);

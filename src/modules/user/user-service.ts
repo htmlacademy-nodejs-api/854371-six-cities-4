@@ -17,7 +17,7 @@ export default class UserService implements UserServiceInterface {
     const user = new UserEntity(dto);
     user.setPassword(dto.password, salt);
 
-    const result = await this.userModel.create(user)
+    const result = await this.userModel.create(user);
     this.logger.info(`New user created: ${user.eMail}`);
 
     return result;
@@ -31,7 +31,7 @@ export default class UserService implements UserServiceInterface {
     const existedUser = await this.findByEmail(dto.eMail);
 
     if (existedUser) {
-      this.logger.info(`User with email ${dto.eMail} found.`)
+      this.logger.info(`User with email ${dto.eMail} found.`);
       return existedUser;
     }
 

@@ -22,7 +22,7 @@ const emailAddresses = [
   'melissa@protonmail.ch',
   'ryan@outlook.com',
   'michelle@google.com'
-]
+];
 
 function getRandomEmail(): string {
   return getRandomItem<string>(emailAddresses);
@@ -39,7 +39,7 @@ const autoUser: AutoUserType = {
   email: getRandomEmail(),
   name: getRandomEmail().split('@')[0]
 
-}
+};
 
 export function createUser() {
   return ({
@@ -48,5 +48,5 @@ export function createUser() {
     password: autoUser.password,
     avatarUrl: autoUser.avatar,
     userType: autoUser.userType
-  })
+  });
 }

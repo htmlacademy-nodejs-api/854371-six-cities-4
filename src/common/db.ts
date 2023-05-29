@@ -5,5 +5,5 @@ export function getUri(
   dbPort: number,
   dbName: string,
 ) {
-  return `mongodb://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?authSource=admin`
+  return `mongodb://${dbUser}:${dbPassword}@${dbHost}:${dbPort}/${dbName}?authSource=admin`;
 }

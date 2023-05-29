@@ -21,7 +21,7 @@ export default class RestApplication {
       this.config.get('DB_PASSWORD'),
       this.config.get('DB_PORT'),
       this.config.get('DB_NAME'),
-    ))
+    ));
   }
 
   public async init() {

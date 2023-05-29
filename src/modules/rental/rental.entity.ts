@@ -17,78 +17,94 @@ export class RentalEntity extends defaultClasses.TimeStamps implements RentalOff
     trim: true
   })
   public title!: string;
+
   @prop({
     required: true,
     minlength: 20,
     maxlength: 1024
   })
   public description!: string;
+
   @prop({
     required: true
   })
   public publishDate!: Date;
+
   @prop({
     required: true
   })
   public city!: Cities;
+
   @prop({
     required: true
   })
   public previewImage!: string;
+
   @prop({
     type: () => [String],
     required: true
   })
   public mainImages!: MainImages;
+
   @prop({
     required: true
   })
   public isPremium!: boolean;
+
   @prop({
     required: true
   })
   public isFavorite!: boolean;
+
   @prop({
     required: true,
     min: 1,
     max: 5
   })
   public rating!: number;
+
   @prop({
     required: true
   })
   public type!: HouseType;
+
   @prop({
     required: true,
     min: 1,
     max: 8
   })
   public roomsCounter!: number;
+
   @prop({
     required: true,
     min: 1,
     max: 10
   })
   public guestsCounter!: number;
+
   @prop({
     required: true,
     min: 100,
     max: 100000
   })
   public cost!: number;
+
   @prop({
     type: () => [String],
     required: true
   })
   public amenities!: Amenity[];
+
   @prop({
     ref: UserEntity
   })
   public userId!: Ref<UserEntity>;
+
   @prop({
     required: true
   })
   public numberComments!: number;
+
   @prop({
     required: true
   })
