@@ -1,0 +1,25 @@
+openapi: 3.1.0
+info:
+  title: API сервис для проекта 6 городов.
+  description: Русуры для проекта 6 городов.
+  license:
+    name: MIT
+    url: https://opensource.org/license/mit/
+  contact:
+    name: API Support
+    email: ruslan91999@gmail.com
+  version: 1.0.0
+
+tags:
+  - name: rental-offers
+    description: Действия с объялвниями об аренде
+  - name: users
+    description: Действия с пользователями
+  - name: comments
+    description: Действия с комментраями пользователей
+
+paths:
+  /rental-offers:
+    get:
+      description: Возвращает все объявления об аренде, но не более 60
+
