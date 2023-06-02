@@ -1,4 +1,4 @@
-import {RentalOffer} from '../types/rental-offer.js';
+import { RentalOffer } from '../types/rental-offer.js';
 
 export function createOffer(offerData: string): RentalOffer {
   const [
@@ -16,7 +16,6 @@ export function createOffer(offerData: string): RentalOffer {
     guestsCounter,
     cost,
     amenities,
-    userId,
     numberComments,
     coordinates
   ] = offerData.replace('\n', '').split('\t');
@@ -37,7 +36,6 @@ export function createOffer(offerData: string): RentalOffer {
     guestsCounter: parseInt(guestsCounter, 10),
     cost: parseInt(cost, 10),
     amenities: amenities.split(';'),
-    userId: parseInt(userId, 10),
     numberComments: parseInt(numberComments, 10),
     coordinates: {
       latitude: coordinatesArray[0],

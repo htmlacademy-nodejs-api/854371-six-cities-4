@@ -1,6 +1,6 @@
 import { OfferGeneratorInterface } from './offer-generator.interface.js';
 import { MockData } from '../../types/mock-data.js';
-import { getRandomItem, getRandomItems, getRandomValue, getStringUserId } from '../../common/utils.js';
+import { getRandomItem, getRandomItems, getRandomValue } from '../../common/utils.js';
 import {
   CitiesLocation,
   FIRST_WEEK_DAY,
@@ -25,6 +25,8 @@ export default class OfferGenerator implements OfferGeneratorInterface {
   }
 
   public generate(): string {
+    const createdAmenities = getRandomItems<string>(this.mockData.amenities).join(';');
+
     const title = getRandomItem<string>(this.mockData.title);
     const description = getRandomItem<string>(this.mockData.description);
     const date = dayjs().subtract(getRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day').toISOString();
@@ -38,12 +40,11 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const numberOfBedrooms = String(getRandomValue(MIN_BEDROOMS, MAX_BEDROOMS));
     const numberOfGuests = String((+numberOfBedrooms * MULTIPLIER_FOR_GUESTS) % MODULO_FOR_GUESTS);
     const pricePerNight = String(getRandomValue(MIN_PRICE_PER_NIGHT, MAX_PRICE_PER_NIGHT) * PRICE_MULTIPLIER);
-    const amenities = getRandomItems<string>(this.mockData.amenities).join(';');
-    const userId = getStringUserId();
+    const amenities = createdAmenities ? createdAmenities : 'Washer';
     const commentsCounter = getRandomValue(MIN_RANDOM_VALUE, MAX_COMMENTS_COUNTER);
     const coordinates = [CitiesLocation[city].latitude, CitiesLocation[city].longitude].join(';');
 
     return [title, description, date, city, previewUrl, photoUrls, isPremium, isFavorite, rating, propertyType,
-      numberOfBedrooms, numberOfGuests, pricePerNight, amenities, userId, commentsCounter, coordinates].join('\t');
+      numberOfBedrooms, numberOfGuests, pricePerNight, amenities, commentsCounter, coordinates].join('\t');
   }
 }

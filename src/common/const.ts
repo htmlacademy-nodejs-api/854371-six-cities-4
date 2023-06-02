@@ -41,3 +41,8 @@ export const PRICE_MULTIPLIER = 100;
 export const MAX_COMMENTS_COUNTER = 1000;
 export const FIRST_WEEK_DAY = 1;
 export const LAST_WEEK_DAY = 7;
+
+export const REGULAR_EXPRESSION = {
+  CheckEmail: /^[a-zA-Z]*@[a-zA-Z]*$/,
+  CheckPhotoPath: /(\/|[^a-zA-Z])(jpg|png)(\/|[^a-zA-Z])/
+};

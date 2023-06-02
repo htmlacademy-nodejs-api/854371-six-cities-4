@@ -1,27 +1,30 @@
-import { config, DotenvParseOutput } from 'dotenv';
-import { ConfigInterface, ConstEnv } from './config.interface.js';
+import { config } from 'dotenv';
+import { ConfigInterface } from './config.interface.js';
 import { LoggerInterface } from '../logger/logger.interface.js';
 import { inject, injectable } from 'inversify';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
+import { configurationSchema, RestSchema } from './rest.schema.js';
 
 @injectable()
-export default class ConfigService implements ConfigInterface {
-  private readonly config: NodeJS.ProcessEnv;
+export default class ConfigService implements ConfigInterface<RestSchema> {
+  private readonly config: RestSchema;
   constructor(
     @inject(APPLICATION_DEPENDENCIES.LoggerInterface) private logger: LoggerInterface
   ) {
-    const parsedOutput = config({path: './src/.env'});
+    const parsedOutput = config();
 
-    if (!parsedOutput.parsed) {
-      this.logger.warn('Can\'t parse .env file');
-      throw new Error('Can\'t read .env file. Perhaps the file does not exists.');
+    if (parsedOutput.error) {
+      this.logger.error(`Can't parse .env file. \n ${parsedOutput.error}`);
     }
 
-    this.config = <DotenvParseOutput>parsedOutput.parsed;
+    configurationSchema.load({});
+    configurationSchema.validate({allowed: 'strict', output: this.logger.info});
+
+    this.config = configurationSchema.getProperties();
     this.logger.info('.env parsed');
   }
 
-  public get(constEnv: ConstEnv) {
-    return this.config[constEnv];
+  public get<T extends keyof RestSchema>(key: T): RestSchema[T] {
+    return this.config[key];
   }
 }
