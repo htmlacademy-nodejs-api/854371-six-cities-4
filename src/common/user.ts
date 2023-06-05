@@ -44,7 +44,7 @@ const autoUser: AutoUserType = {
 export function createUser() {
   return ({
     name: autoUser.name,
-    eMail: autoUser.email,
+    email: autoUser.email,
     password: autoUser.password,
     avatarUrl: autoUser.avatar,
     userType: autoUser.userType
