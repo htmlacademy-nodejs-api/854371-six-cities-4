@@ -10,7 +10,7 @@
   "main": "main.js",
   "scripts": {
     "start": "npm run build && node ./dist/main.js",
-    "start:dev": "npm run build && node ./dist/main.js | pino-pretty --colorize -t",
+    "start:dev": "nodemon",
     "start:cli": "npm run build && node ./dist/main.cli.js",
     "api:edit": "openapi-browser --file ./spicification/specification.yml --port 8082 --silent true",
     "build": "npm run clean && npm run compile",
@@ -30,6 +30,7 @@
     "eslint": "8.39.0",
     "eslint-config-htmlacademy": "9.1.1",
     "json-server": "0.17.1",
+    "nodemon": "2.0.22",
     "openapi-browser": "0.3.1",
     "pino-pretty": "9.1.1",
     "rimraf": "3.0.2",
