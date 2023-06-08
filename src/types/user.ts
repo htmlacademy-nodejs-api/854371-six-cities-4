@@ -1,6 +1,6 @@
 export type User = {
   name: string;
-  eMail: string;
+  email: string;
   avatarUrl: string;
   userType: 'base' | 'pro';
 }

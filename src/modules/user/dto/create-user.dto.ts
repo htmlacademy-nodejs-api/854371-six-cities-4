@@ -1,7 +1,7 @@
 export default class CreateUserDto {
   name!: string;
   password!: string;
-  eMail!: string;
+  email!: string;
   avatarUrl!: string;
   userType!: 'base' | 'pro';
 }

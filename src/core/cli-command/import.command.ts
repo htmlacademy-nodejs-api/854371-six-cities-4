@@ -37,13 +37,16 @@ export default class ImportCommand {
     this.configService = new ConfigService(this.logger);
   }
 
-  private async saveRentalOffer(rentalOffer: RentalOffer) {
+  private async findOrCreateUser() {
     const createdUser = createUser();
-    const userFromDatabase = await this.userService.findOrCreate(createdUser, this.salt);
+    return await this.userService.findOrCreate(createdUser, this.salt);
+  }
 
+  private async saveRentalOffer(rentalOffer: RentalOffer) {
+    const createdUser = await this.findOrCreateUser();
     await this.rentalService.create({
       ...rentalOffer,
-      userId: userFromDatabase.id
+      userId: createdUser.id
     });
   }
 

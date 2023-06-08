@@ -26,7 +26,9 @@ export default class MongoClientService implements DatabaseClientInterface {
     let attempt = 0;
     while (attempt < RETRY_COUNT) {
       try {
-        return await mongoose.connect(uri);
+        this.mongooseInstance = await mongoose.connect(uri);
+        this.isConnected = true;
+        return this.mongooseInstance;
       } catch (error) {
         attempt++;
         this.logger.error(`Failed to connect to the database. Attempt ${attempt}`);
@@ -41,8 +43,8 @@ export default class MongoClientService implements DatabaseClientInterface {
   public async connect(url: string): Promise<void> {
     if (this.isConnected) {
       this.logger.error('The connection to the database has already been established.');
-    }
-    if (!this.isConnected) {
+      return undefined;
+    } else {
       this.logger.info('Trying connect');
       await this._connectWithRetry(url);
       this.logger.info('Connect has been complete');
@@ -50,11 +52,11 @@ export default class MongoClientService implements DatabaseClientInterface {
     }
   }
 
-  public async disconnect() {
+  public async disconnect(): Promise<void> {
     if (!this.isConnected) {
       this.logger.error('The disconnection from the database has already been completed.');
-    }
-    if (this.isConnected) {
+      return undefined;
+    } else {
       await this._disconnect();
     }
   }

@@ -32,19 +32,18 @@ function createUserAvatar(): string {
   return `https://api.dicebear.com/6.x/avataaars/jpg?seed=${Math.round(Math.random() * 100000)}`;
 }
 
-const autoUser: AutoUserType = {
-  password: 'pass123456',
-  avatar: createUserAvatar(),
-  userType: 'base',
-  email: getRandomEmail(),
-  name: getRandomEmail().split('@')[0]
-
-};
-
 export function createUser() {
+  const autoUser: AutoUserType = {
+    password: 'pass123456',
+    avatar: createUserAvatar(),
+    userType: 'base',
+    email: getRandomEmail(),
+    name: getRandomEmail().split('@')[0]
+  };
+
   return ({
     name: autoUser.name,
-    eMail: autoUser.email,
+    email: autoUser.email,
     password: autoUser.password,
     avatarUrl: autoUser.avatar,
     userType: autoUser.userType

@@ -18,22 +18,22 @@ export default class UserService implements UserServiceInterface {
     user.setPassword(dto.password, salt);
 
     const result = await this.userModel.create(user);
-    this.logger.info(`New user created: ${user.eMail}`);
+    this.logger.info(`New user created: ${user.email}`);
 
     return result;
   }
 
-  public async findByEmail(eMail: string): Promise<DocumentType<UserEntity> | null> {
-    const result = this.userModel.findOne({eMail});
-    this.logger.info(`User with email ${eMail} found in the database.`);
+  public async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
+    const result = this.userModel.findOne({email: email});
+    this.logger.info(`User with email ${email} found in the database.`);
     return result;
   }
 
   public async findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
-    const existedUser = await this.findByEmail(dto.eMail);
+    const existedUser = await this.findByEmail(dto.email);
 
     if (existedUser) {
-      this.logger.info(`User with email ${dto.eMail} found.`);
+      this.logger.info(`User with email ${dto.email} found.`);
       return existedUser;
     }
 
