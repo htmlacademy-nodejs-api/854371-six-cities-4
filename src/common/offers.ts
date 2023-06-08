@@ -1,4 +1,5 @@
 import { RentalOffer } from '../types/rental-offer.js';
+import { MAX_RETURNED_OFFERS } from './const.js';
 
 export function createOffer(offerData: string): RentalOffer {
   const [
@@ -42,4 +43,11 @@ export function createOffer(offerData: string): RentalOffer {
       longitude: coordinatesArray[1]
     }
   } as RentalOffer;
+}
+
+export function getLimit(limit?: number): number {
+  if (!limit) {
+    return MAX_RETURNED_OFFERS;
+  }
+  return limit > MAX_RETURNED_OFFERS ? MAX_RETURNED_OFFERS : limit;
 }

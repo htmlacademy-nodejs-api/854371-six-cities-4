@@ -46,3 +46,5 @@ export const REGULAR_EXPRESSION = {
   CheckEmail: /^[a-zA-Z]*@[a-zA-Z]*$/,
   CheckPhotoPath: /(\/|[^a-zA-Z])(jpg|png)(\/|[^a-zA-Z])/
 };
+
+export const MAX_RETURNED_OFFERS = 60;
