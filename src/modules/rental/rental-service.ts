@@ -21,26 +21,33 @@ export default class RentalService implements RentalServiceInterface {
     return result;
   }
 
-  find(limit?: number): Promise<DocumentType<RentalEntity>[]> {
-    const maxLimit = getLimit(limit);
-    const result = this.rentalModel.find({}, null, {limit: getLimit()})
+  async find(limit?: number): Promise<DocumentType<RentalEntity>[]> {
+    const result = await this.rentalModel.find({}, null, {limit: getLimit(limit)})
       .populate(['userId'])
       .exec();
-    this.logger.info(`Returned the limit (${maxLimit}) of offers`);
+    this.logger.info(`find: Returned (${result.length}) of offers`);
     return result;
   }
 
-  findById(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    const result = this.rentalModel.findById({offerId})
+  async findById(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+    const result = await this.rentalModel.findById({offerId})
       .populate(['userId'])
       .exec();
-    this.logger.info(`Returned the offer with ID ${offerId}`);
+    if (result) {
+      this.logger.info(`findById: Returned the offer with ID ${offerId}`);
+    } else {
+      this.logger.info(`findById: The offer with ID ${offerId} was not found`);
+    }
     return result;
   }
 
-  delete(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    const result = this.rentalModel.findByIdAndDelete(offerId);
-    this.logger.info(`The offer with ID ${offerId} has been deleted`);
+  async delete(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+    const result = await this.rentalModel.findByIdAndDelete(offerId);
+    if (result) {
+      this.logger.info(`delete: The offer with ID ${offerId} has been deleted`);
+    } else {
+      this.logger.info(`delete: The offer with ID ${offerId} was not found`);
+    }
     return result;
   }
 }
