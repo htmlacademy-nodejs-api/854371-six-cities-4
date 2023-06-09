@@ -6,6 +6,7 @@ import { inject, injectable } from 'inversify';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { getLimit } from '../../common/offers.js';
+import UpdateRentalDto from './dto/update-rental.dto.js';
 
 @injectable()
 export default class RentalService implements RentalServiceInterface {
@@ -37,6 +38,18 @@ export default class RentalService implements RentalServiceInterface {
       this.logger.info(`findById: Returned the offer with ID ${offerId}`);
     } else {
       this.logger.info(`findById: The offer with ID ${offerId} was not found`);
+    }
+    return result;
+  }
+
+  async findByIdAndUpdate(offerId: string, dto: UpdateRentalDto): Promise<DocumentType<RentalEntity> | null> {
+    const result = await this.rentalModel.findOneAndUpdate({offerId}, dto, {new: true})
+      .populate('userId')
+      .exec();
+    if (result) {
+      this.logger.info(`findByIdAndUpdate: The offer with ID ${offerId} has been updated`);
+    } else {
+      this.logger.info(`findByIdAndUpdate: The offer with ID ${offerId} was not found`);
     }
     return result;
   }

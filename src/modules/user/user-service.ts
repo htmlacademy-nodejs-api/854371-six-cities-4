@@ -5,6 +5,7 @@ import { UserEntity } from './user.entity.js';
 import { inject, injectable } from 'inversify';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
+import UpdateUserDto from './dto/update-user.dto.js';
 
 @injectable()
 export default class UserService implements UserServiceInterface {
@@ -38,5 +39,26 @@ export default class UserService implements UserServiceInterface {
     }
 
     return this.create(dto, salt);
+  }
+
+  public async findByEmailAndUpdate(dto: UpdateUserDto, salt: string): Promise<DocumentType<UserEntity> | null> {
+    const user = await this.findByEmail(dto.email);
+    if (user) {
+      const updatedUser = new UserEntity(user);
+      if (dto.password) {
+        updatedUser.setPassword(dto.password, salt);
+      }
+      return this.userModel.findOneAndUpdate({email: dto.email}, updatedUser, {new: true});
+    } else {
+      this.logger.info(`The user with email ${dto.email} was not found`);
+      return user;
+    }
+  }
+
+  public async deleteUser(email: string): Promise<DocumentType<UserEntity> | null> {
+    const result = await this.userModel.findOneAndDelete({email});
+    if (result) {
+      this.logger.inf
+    }
   }
 }

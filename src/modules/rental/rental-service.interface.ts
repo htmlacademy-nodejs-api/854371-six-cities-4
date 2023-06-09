@@ -1,6 +1,7 @@
 import CreateRentalDto from './dto/create-rental.dto.js';
 import { DocumentType } from '@typegoose/typegoose';
 import { RentalEntity } from './rental.entity.js';
+import UpdateRentalDto from './dto/update-rental.dto.js';
 
 export interface RentalServiceInterface {
   /**
@@ -20,6 +21,13 @@ export interface RentalServiceInterface {
    * @param offerId id объявления
    */
   findById(offerId: string): Promise<DocumentType<RentalEntity> | null>
+
+  /**
+   * Обновить объялвние в базе данных
+   * @param offerId id объявления
+   * @param dto объект с обновлёнными данными объявления
+   */
+  findByIdAndUpdate(offerId: string, dto: UpdateRentalDto): Promise<DocumentType<RentalEntity> | null>;
 
   /**
    * Удалить объявление с `offerId`
