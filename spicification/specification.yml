@@ -309,7 +309,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  city-favorite-offers/{city}/:
+  /city-favorite-offers/{city}/:
     get:
       tags:
         - city-favorite-offers
@@ -332,7 +332,7 @@ paths:
                   $ref: '#/components/schemas/RentalOffer'
                 maxItems: 3
 
-  city-favorite-offers/:
+  /city-favorite-offers/:
     get:
       tags:
         - city-favorite-offers
@@ -429,21 +429,21 @@ components:
           format: float
         author:
           type: string
-      NewComment:
-        type: object
-        required:
-          - text
-          - rating
-        properties:
-          text:
-            type: string
-            minLength: 5
-            maxLength: 1024
-          rating:
-            type: number
-            minimum: 1
-            maximum: 5
-            format: float
+        NewComment:
+          type: object
+          required:
+            - text
+            - rating
+          properties:
+            text:
+              type: string
+              minLength: 5
+              maxLength: 1024
+            rating:
+              type: number
+              minimum: 1
+              maximum: 5
+              format: float
 
     NewComment:
       type: object
