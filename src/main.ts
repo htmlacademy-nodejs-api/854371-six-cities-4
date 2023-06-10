@@ -5,9 +5,10 @@ import { Container } from 'inversify';
 import { createRestApplicationContainer } from './app/rest.container.js';
 import { createUserContainer } from './modules/user/user.container.js';
 import { createRentalContainer } from './modules/rental/rental.container.js';
+import { createCommentContainer } from './modules/comment/comment.container.js';
 
 async function bootstrap() {
-  const mainContainer = Container.merge(createRestApplicationContainer(), createUserContainer(), createRentalContainer());
+  const mainContainer = Container.merge(createRestApplicationContainer(), createUserContainer(), createRentalContainer(), createCommentContainer());
 
   const application = mainContainer.get<RestApplication>(APPLICATION_DEPENDENCIES.RestApplication);
 

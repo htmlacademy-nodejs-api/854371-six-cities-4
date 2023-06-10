@@ -34,7 +34,7 @@ export default class UserService implements UserServiceInterface {
     const existedUser = await this.findByEmail(dto.email);
 
     if (existedUser) {
-      this.logger.info(`User with email ${dto.email} found.`);
+      this.logger.info(`findByEmail: User with email ${dto.email} found.`);
       return existedUser;
     }
 
@@ -50,7 +50,7 @@ export default class UserService implements UserServiceInterface {
       }
       return this.userModel.findOneAndUpdate({email: dto.email}, updatedUser, {new: true});
     } else {
-      this.logger.info(`The user with email ${dto.email} was not found`);
+      this.logger.info(`findByEmailAndUpdate: The user with email ${dto.email} was not found`);
       return user;
     }
   }
@@ -58,7 +58,10 @@ export default class UserService implements UserServiceInterface {
   public async deleteUser(email: string): Promise<DocumentType<UserEntity> | null> {
     const result = await this.userModel.findOneAndDelete({email});
     if (result) {
-      this.logger.inf
+      this.logger.info(`deleteUser: The user with email ${email} has been deleted`);
+    } else {
+      this.logger.info(`deleteUser: The user with email ${email} was not found`);
     }
+    return result;
   }
 }

@@ -6,5 +6,7 @@ export const APPLICATION_DEPENDENCIES = {
   UserServiceInterface: Symbol.for('UserServiceInterface'),
   UserModel: Symbol.for('UserModel'),
   RentalServiceInterface: Symbol.for('RentalServiceInterface'),
-  RentalModel: Symbol.for('RentalModel')
+  RentalModel: Symbol.for('RentalModel'),
+  CommentServiceInterface: Symbol.for('CommentServiceInterface'),
+  CommentModel: Symbol.for('CommentModel')
 } as const;
