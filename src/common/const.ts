@@ -48,3 +48,10 @@ export const REGULAR_EXPRESSION = {
 };
 
 export const MAX_RETURNED_OFFERS = 60;
+export const MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY = 3;
+export const MAX_RETURNED_COMMENTS = 50;
+
+export const SortType = {
+  DEC: 1,
+  INC: -1
+} as const;

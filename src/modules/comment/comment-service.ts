@@ -7,6 +7,8 @@ import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.j
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { UserEntity } from '../user/user.entity.js';
 import { RentalEntity } from '../rental/rental.entity.js';
+import { getLimit } from '../../common/offers.js';
+import { MAX_RETURNED_COMMENTS } from '../../common/const.js';
 
 export default class CommentService implements CommentServiceInterface {
   constructor(
@@ -45,8 +47,8 @@ export default class CommentService implements CommentServiceInterface {
     return result;
   }
 
-  public async findCommentsByOfferId(offerId: string): Promise<DocumentType<CommentEntity>[] | null> {
-    const result = await this.commentModel.find({offerId})
+  public async findCommentsByOfferId(offerId: string, limit?: number): Promise<DocumentType<CommentEntity>[] | null> {
+    const result = await this.commentModel.find({offerId}, null, {limit: getLimit(MAX_RETURNED_COMMENTS, limit)})
       .populate(['userId'])
       .exec();
     if (result) {

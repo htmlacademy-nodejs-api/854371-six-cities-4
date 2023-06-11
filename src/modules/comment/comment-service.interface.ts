@@ -12,6 +12,7 @@ export interface CommentServiceInterface {
   /**
    * Найти все комментарии для оффера с id `offerId`
    * @param offerId идентификатор оффера
+   * @param limit количество комментариев к показу, не может быть больше 50
    */
-  findCommentsByOfferId(offerId: string): Promise<DocumentType<CommentEntity>[] | null>
+  findCommentsByOfferId(offerId: string, limit?: number): Promise<DocumentType<CommentEntity>[] | null>
 }

@@ -1,13 +1,20 @@
-import { defaultClasses, getModelForClass, modelOptions, prop, Ref } from '@typegoose/typegoose';
+import { defaultClasses, getModelForClass, modelOptions, post, prop, Ref } from '@typegoose/typegoose';
 import { Comment } from '../../types/comment.js';
 import { UserEntity } from '../user/user.entity.js';
-import { RentalEntity } from '../rental/rental.entity.js';
+import { RentalEntity, RentalModel } from '../rental/rental.entity.js';
 
 export interface CommentEntity extends defaultClasses.Base {}
 
 @modelOptions({
   schemaOptions: {
     collection: 'comments'
+  }
+})
+@post<CommentEntity>('save', async function() {
+  const rental = await RentalModel.findById(this.offerId);
+  if (rental) {
+    rental.numberComments++;
+    await rental.save();
   }
 })
 export class CommentEntity extends defaultClasses.TimeStamps implements Comment {

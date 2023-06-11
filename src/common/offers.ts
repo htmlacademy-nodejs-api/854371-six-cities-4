@@ -1,5 +1,4 @@
 import { RentalOffer } from '../types/rental-offer.js';
-import { MAX_RETURNED_OFFERS } from './const.js';
 
 export function createOffer(offerData: string): RentalOffer {
   const [
@@ -45,9 +44,15 @@ export function createOffer(offerData: string): RentalOffer {
   } as RentalOffer;
 }
 
-export function getLimit(limit?: number): number {
+export function getLimit(maxLimit: number, limit?: number): number {
   if (!limit) {
-    return MAX_RETURNED_OFFERS;
+    return maxLimit;
   }
-  return limit > MAX_RETURNED_OFFERS ? MAX_RETURNED_OFFERS : limit;
+  return limit > maxLimit ? maxLimit : limit;
+}
+
+export function transformCityWord(city: string): string {
+  const cityLetters = city.trim().split('');
+  cityLetters[0].toUpperCase();
+  return cityLetters.join('');
 }

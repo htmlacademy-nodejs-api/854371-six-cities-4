@@ -6,7 +6,6 @@ import {
   FIRST_WEEK_DAY,
   LAST_WEEK_DAY,
   MAX_BEDROOMS,
-  MAX_COMMENTS_COUNTER,
   MAX_PRICE_PER_NIGHT,
   MAX_RANDOM_VALUE_FOR_BOOL,
   MAX_RATING,
@@ -41,7 +40,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const numberOfGuests = String((+numberOfBedrooms * MULTIPLIER_FOR_GUESTS) % MODULO_FOR_GUESTS);
     const pricePerNight = String(getRandomValue(MIN_PRICE_PER_NIGHT, MAX_PRICE_PER_NIGHT) * PRICE_MULTIPLIER);
     const amenities = createdAmenities ? createdAmenities : 'Washer';
-    const commentsCounter = getRandomValue(MIN_RANDOM_VALUE, MAX_COMMENTS_COUNTER);
+    const commentsCounter = 0;
     const coordinates = [CitiesLocation[city].latitude, CitiesLocation[city].longitude].join(';');
 
     return [title, description, date, city, previewUrl, photoUrls, isPremium, isFavorite, rating, propertyType,
