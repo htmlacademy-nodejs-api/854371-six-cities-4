@@ -43,21 +43,18 @@ export default class MongoClientService implements DatabaseClientInterface {
   public async connect(url: string): Promise<void> {
     if (this.isConnected) {
       this.logger.error('The connection to the database has already been established.');
-      return undefined;
-    } else {
-      this.logger.info('Trying connect');
-      await this._connectWithRetry(url);
-      this.logger.info('Connect has been complete');
-
+      return;
     }
+    this.logger.info('Trying connect');
+    await this._connectWithRetry(url);
+    this.logger.info('Connect has been complete');
   }
 
   public async disconnect(): Promise<void> {
     if (!this.isConnected) {
       this.logger.error('The disconnection from the database has already been completed.');
-      return undefined;
-    } else {
-      await this._disconnect();
+      return;
     }
+    await this._disconnect();
   }
 }

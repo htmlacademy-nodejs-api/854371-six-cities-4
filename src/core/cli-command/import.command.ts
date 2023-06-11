@@ -82,6 +82,7 @@ export default class ImportCommand {
       await fileReader.read();
     } catch (error) {
       console.log(`Can't read the file: ${getErrorMessage(error)}`);
+      await this.databaseClient.disconnect();
     }
   }
 }
