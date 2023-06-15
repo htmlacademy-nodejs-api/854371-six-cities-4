@@ -100,7 +100,7 @@ export class RentalEntity extends defaultClasses.TimeStamps implements RentalOff
   public userId!: Ref<UserEntity>;
 
   @prop({
-    required: true
+    required: false
   })
   public numberComments!: number;
 

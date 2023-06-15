@@ -5,7 +5,9 @@ import { RentalEntity } from './rental.entity.js';
 import { inject, injectable } from 'inversify';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
-import { getLimit } from '../../common/offers.js';
+import { getLimit, transformCityWord } from '../../common/offers.js';
+import UpdateRentalDto from './dto/update-rental.dto.js';
+import { MAX_RETURNED_OFFERS, MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY, SortType } from '../../common/const.js';
 
 @injectable()
 export default class RentalService implements RentalServiceInterface {
@@ -21,26 +23,101 @@ export default class RentalService implements RentalServiceInterface {
     return result;
   }
 
-  find(limit?: number): Promise<DocumentType<RentalEntity>[]> {
-    const maxLimit = getLimit(limit);
-    const result = this.rentalModel.find({}, null, {limit: getLimit()})
+  async find(limit?: number): Promise<DocumentType<RentalEntity>[]> {
+    const result = await this.rentalModel.find({}, null, {limit: getLimit(MAX_RETURNED_OFFERS, limit)})
       .populate(['userId'])
       .exec();
-    this.logger.info(`Returned the limit (${maxLimit}) of offers`);
+    this.logger.info(`find: Returned (${result.length}) of offers`);
     return result;
   }
 
-  findById(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    const result = this.rentalModel.findById({offerId})
+  async findById(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+    const result = await this.rentalModel.findById({offerId})
       .populate(['userId'])
       .exec();
-    this.logger.info(`Returned the offer with ID ${offerId}`);
+    if (result) {
+      this.logger.info(`findById: Returned the offer with ID ${offerId}`);
+    } else {
+      this.logger.info(`findById: The offer with ID ${offerId} was not found`);
+    }
     return result;
   }
 
-  delete(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    const result = this.rentalModel.findByIdAndDelete(offerId);
-    this.logger.info(`The offer with ID ${offerId} has been deleted`);
+  async findByCityAndPremium(city: string, limit?: number): Promise<DocumentType<RentalEntity>[] | null> {
+    const transformedCityWord = transformCityWord(city);
+    const result = await this.rentalModel.find({city: transformedCityWord, isPremium: true}, null, {limit: getLimit(MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY, limit)});
+    if (result) {
+      this.logger.info(`findByCityAndPremium: Found ${result.length} premium offers for city ${transformedCityWord}`);
+    } else {
+      this.logger.info(`findByCityAndPremium: No offers found for city ${transformedCityWord}`);
+    }
+
+    return result;
+  }
+
+  async findByIdAndUpdate(offerId: string, dto: UpdateRentalDto): Promise<DocumentType<RentalEntity> | null> {
+    const result = await this.rentalModel.findOneAndUpdate({offerId}, dto, {new: true})
+      .populate('userId')
+      .sort({createdAt: SortType.DEC})
+      .exec();
+    if (result) {
+      this.logger.info(`findByIdAndUpdate: The offer with ID ${offerId} has been updated`);
+    } else {
+      this.logger.info(`findByIdAndUpdate: The offer with ID ${offerId} was not found`);
+    }
+    return result;
+  }
+
+  async findFavorite(): Promise<DocumentType<RentalEntity>[] | null> {
+    const result = await this.rentalModel.find({isFavorite: true})
+      .populate(['userId'])
+      .exec();
+
+    if (result) {
+      this.logger.info(`findFavorite: Found ${result.length} listings added to favorites`);
+    } else {
+      this.logger.info('No favorite listings found');
+    }
+
+    return result;
+  }
+
+  async updateRentalOffer(offerId: string, dto: UpdateRentalDto): Promise<DocumentType<RentalEntity> | null> {
+    const result = await this.rentalModel.findByIdAndUpdate(offerId, dto, {new: true});
+
+    if (result) {
+      this.logger.info(`updateRentalOffer: Offer with ID ${offerId} has been update`);
+    } else {
+      this.logger.info(`updateRentalOffer: Offer with ID ${offerId} not found`);
+    }
+
+    return result;
+  }
+
+  async changeFavoriteFlag(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+    const rentalOffer = await this.findById(offerId);
+
+    if (!rentalOffer) {
+      this.logger.error(`changeFavoriteFlag: The offer with ID ${offerId} was not found`);
+      return null;
+    }
+
+    const changedRentalOffer = await this.rentalModel.findOneAndUpdate({offerId}, {isFavorite: !rentalOffer.isFavorite}, {new: true})
+      .populate(['userId'])
+      .exec();
+
+    this.logger.info('');
+
+    return changedRentalOffer;
+  }
+
+  async deleteRental(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+    const result = await this.rentalModel.findByIdAndDelete(offerId);
+    if (result) {
+      this.logger.info(`delete: The offer with ID ${offerId} has been deleted`);
+    } else {
+      this.logger.info(`delete: The offer with ID ${offerId} was not found`);
+    }
     return result;
   }
 }

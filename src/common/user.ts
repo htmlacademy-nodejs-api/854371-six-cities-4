@@ -1,5 +1,5 @@
 import { getRandomItem } from './utils.js';
-import { AutoUserType } from '../types/autoUser.js';
+import { AutoUserType } from '../types/auto-user.js';
 
 const emailAddresses = [
   'john@gmail.com',

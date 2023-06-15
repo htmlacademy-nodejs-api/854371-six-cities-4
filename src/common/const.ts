@@ -38,9 +38,9 @@ export const MODULO_FOR_GUESTS = 10;
 export const MIN_PRICE_PER_NIGHT = 1;
 export const MAX_PRICE_PER_NIGHT = 1000;
 export const PRICE_MULTIPLIER = 100;
-export const MAX_COMMENTS_COUNTER = 1000;
 export const FIRST_WEEK_DAY = 1;
 export const LAST_WEEK_DAY = 7;
+export const DECIMAL_PLACES_COUNT = 2;
 
 export const REGULAR_EXPRESSION = {
   CheckEmail: /^[a-zA-Z]*@[a-zA-Z]*$/,
@@ -48,3 +48,15 @@ export const REGULAR_EXPRESSION = {
 };
 
 export const MAX_RETURNED_OFFERS = 60;
+export const MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY = 3;
+export const MAX_RETURNED_COMMENTS = 50;
+
+export const SortType = {
+  DEC: 1,
+  INC: -1
+} as const;
+
+export const Field = {
+  INCLUDE: 1,
+  EXCLUDE: 0
+} as const;
