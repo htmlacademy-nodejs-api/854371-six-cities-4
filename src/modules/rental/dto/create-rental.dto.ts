@@ -1,7 +1,6 @@
 export default class CreateRentalDto {
   public title!: string;
   public description!: string;
-  public publishDate!: Date;
   public city!: string;
   public previewImage!: string;
   public mainImages!: string[];

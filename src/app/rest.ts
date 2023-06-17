@@ -6,6 +6,7 @@ import { RestSchema } from '../core/config/rest.schema.js';
 import { DatabaseClientInterface } from '../core/databese-client/database-client.interface.js';
 import { getUri } from '../common/db.js';
 import express, { Express } from 'express';
+import { ControllerInterface } from '../core/controller/controller-interface.js';
 
 @injectable()
 export default class RestApplication {
@@ -13,7 +14,8 @@ export default class RestApplication {
   constructor(
     @inject(APPLICATION_DEPENDENCIES.LoggerInterface) private logger: LoggerInterface,
     @inject(APPLICATION_DEPENDENCIES.ConfigService) private config: ConfigInterface<RestSchema>,
-    @inject(APPLICATION_DEPENDENCIES.DatabaseClientInterface) private dbClient: DatabaseClientInterface
+    @inject(APPLICATION_DEPENDENCIES.DatabaseClientInterface) private dbClient: DatabaseClientInterface,
+    @inject(APPLICATION_DEPENDENCIES.RentalController) private rentalController: ControllerInterface
   ) {
     this.expressApplication = express();
   }
@@ -37,11 +39,25 @@ export default class RestApplication {
     this.logger.info(`🚀Server started on http://localhost:${port}/`);
   }
 
+  private async _initRouters() {
+    this.logger.info('Controller initialization…');
+    this.expressApplication.use('/rental-offers', this.rentalController.router);
+    this.logger.info('Controller initialization completed');
+  }
+
+  private async _initMiddleware() {
+    this.logger.info('Global middleware initialization…');
+    this.expressApplication.use(express.json());
+    this.logger.info('Global middleware initialization completed');
+  }
+
   public async init() {
     this.logger.info('Application init...');
     this.logger.info('Init database');
     await this._initDb();
     this.logger.info('Init database completed');
     await this._initServer();
+    await this._initRouters();
+    await this._initMiddleware();
   }
 }

@@ -1,4 +1,5 @@
 import * as crypto from 'node:crypto';
+import { ClassConstructor, plainToInstance } from 'class-transformer';
 
 export function getRandomValue(min: number, max: number): number {
   return Math.round(Math.random() * (max - min)) + min;
@@ -27,4 +28,8 @@ export function getErrorMessage(error: unknown) {
 export function createSha256(line: string, salt: string) {
   const shaHasher = crypto.createHmac('sha256', salt);
   return shaHasher.update(line).digest('hex');
+}
+
+export function fillDto<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
+  return plainToInstance(someDto, plainObject, {excludeExtraneousValues: true});
 }

@@ -24,10 +24,12 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async find(limit?: number): Promise<DocumentType<RentalEntity>[]> {
-    const result = await this.rentalModel.find({}, null, {limit: getLimit(MAX_RETURNED_OFFERS, limit)})
-      .populate(['userId'])
-      .exec();
-    this.logger.info(`find: Returned (${result.length}) of offers`);
+    const result = await this.rentalModel.aggregate([
+      {$addFields: {id: {$toString: '$_id'}}},
+      {$sort: {createdAt: SortType.DEC}},
+      {$limit: getLimit(MAX_RETURNED_OFFERS, limit)},
+    ]).exec();
+    this.logger.info(`find: Returned (${getLimit(MAX_RETURNED_OFFERS, limit)}) of offers`);
     return result;
   }
 
