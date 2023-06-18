@@ -7,6 +7,7 @@ import { DatabaseClientInterface } from '../core/databese-client/database-client
 import { getUri } from '../common/db.js';
 import express, { Express } from 'express';
 import { ControllerInterface } from '../core/controller/controller-interface.js';
+import ExceptionFilter from '../core/exception-filters/exception-filter.js';
 
 @injectable()
 export default class RestApplication {
@@ -15,7 +16,8 @@ export default class RestApplication {
     @inject(APPLICATION_DEPENDENCIES.LoggerInterface) private logger: LoggerInterface,
     @inject(APPLICATION_DEPENDENCIES.ConfigService) private config: ConfigInterface<RestSchema>,
     @inject(APPLICATION_DEPENDENCIES.DatabaseClientInterface) private dbClient: DatabaseClientInterface,
-    @inject(APPLICATION_DEPENDENCIES.RentalController) private rentalController: ControllerInterface
+    @inject(APPLICATION_DEPENDENCIES.RentalController) private rentalController: ControllerInterface,
+    @inject(APPLICATION_DEPENDENCIES.ExceptionFilter) private exceptionFilter: ExceptionFilter
   ) {
     this.expressApplication = express();
   }
@@ -51,6 +53,12 @@ export default class RestApplication {
     this.logger.info('Global middleware initialization completed');
   }
 
+  private async _initExeptionFilters() {
+    this.logger.info('Exception filters initialization');
+    this.expressApplication.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
+    this.logger.info('Exception filters completed');
+  }
+
   public async init() {
     this.logger.info('Application init...');
     this.logger.info('Init database');
@@ -59,5 +67,6 @@ export default class RestApplication {
     await this._initMiddleware();
     await this._initServer();
     await this._initRouters();
+    await this._initExeptionFilters();
   }
 }

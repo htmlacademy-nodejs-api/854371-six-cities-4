@@ -8,6 +8,8 @@ import { ConfigInterface } from '../core/config/config.interface.js';
 import { DatabaseClientInterface } from '../core/databese-client/database-client.interface.js';
 import MongoClientService from '../core/databese-client/mongo-client.service.js';
 import ConfigService from '../core/config/config.service.js';
+import { ExceptionFilterInterface } from '../core/exception-filters/exception-filter.interface.js';
+import ExceptionFilter from '../core/exception-filters/exception-filter.js';
 
 export function createRestApplicationContainer() {
   const restApplicationContainer = new Container();
@@ -16,6 +18,7 @@ export function createRestApplicationContainer() {
   restApplicationContainer.bind<LoggerInterface>(APPLICATION_DEPENDENCIES.LoggerInterface).to(PinoService).inSingletonScope();
   restApplicationContainer.bind<ConfigInterface<RestSchema>>(APPLICATION_DEPENDENCIES.ConfigService).to(ConfigService).inSingletonScope();
   restApplicationContainer.bind<DatabaseClientInterface>(APPLICATION_DEPENDENCIES.DatabaseClientInterface).to(MongoClientService).inSingletonScope();
+  restApplicationContainer.bind<ExceptionFilterInterface>(APPLICATION_DEPENDENCIES.ExceptionFilter).to(ExceptionFilter).inSingletonScope();
 
   return restApplicationContainer;
 }
