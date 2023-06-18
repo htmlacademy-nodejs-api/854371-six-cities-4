@@ -8,6 +8,8 @@ import RentalService from './rental-service.js';
 import { MAX_RETURNED_OFFERS } from '../../common/const.js';
 import { fillDto } from '../../common/utils.js';
 import RentalRdo from './rdo/rental.rdo.js';
+import RentalCreatedRdo from './rdo/rental-created.rdo.js';
+import CreateRentalDto from './dto/create-rental.dto.js';
 
 @injectable()
 export default class RentalController extends ControllerAbstract {
@@ -19,7 +21,7 @@ export default class RentalController extends ControllerAbstract {
     this.logger.info('Route registration for listings');
 
     this.addRoute({path: '/', method: HttpMethod.Get, next: this.index});
-    // this.addRoute({path: '/', method: HttpMethod.Post, next: this.create});
+    this.addRoute({path: '/', method: HttpMethod.Post, next: this.create});
     // this.addRoute({path: '/:offerId', method: HttpMethod.Get, next: this.getInfo});
     // this.addRoute({path: '/:offerId', method: HttpMethod.Put, next: this.edit});
     // this.addRoute({path: '/:offerId', method: HttpMethod.Delete, next: this.remove});
@@ -31,11 +33,14 @@ export default class RentalController extends ControllerAbstract {
     this.ok(res, rentalOffersToResponse);
   }
 
-  /*public create(req: Request, res: Response): void {
-    //
+  public async create({body}: Request<Record<string, unknown>, Record<string, unknown>, CreateRentalDto>,
+    res: Response): Promise<void> {
+    console.log(body);
+    const result = await this.rentalService.create(body);
+    this.created(res, fillDto(RentalCreatedRdo, result));
   }
 
-  public getInfo(req: Request, res: Response): void {
+  /*public getInfo(req: Request, res: Response): void {
     //
   }
 

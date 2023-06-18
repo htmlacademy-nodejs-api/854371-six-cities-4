@@ -28,7 +28,6 @@ export type MainImages = [string, string, string, string, string, string]
 export type RentalOffer = {
   title: string;
   description: string;
-  publishDate: Date;
   city: Cities;
   previewImage: string;
   mainImages: MainImages;

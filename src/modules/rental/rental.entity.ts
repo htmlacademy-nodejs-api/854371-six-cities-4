@@ -28,11 +28,6 @@ export class RentalEntity extends defaultClasses.TimeStamps implements RentalOff
   @prop({
     required: true
   })
-  public publishDate!: Date;
-
-  @prop({
-    required: true
-  })
   public city!: Cities;
 
   @prop({

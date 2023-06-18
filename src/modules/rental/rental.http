@@ -1,0 +1,24 @@
+POST http://localhost:3001/rental-offers/
+Content-Type: application/json
+
+{
+  "title": "{{$random.alphabetic(15)}}",
+  "description": "{{$random.alphabetic(45)}}",
+  "city": "{{$random.alphabetic(10)}}",
+  "previewImage": "{{$exampleServer}}",
+  "mainImages": ["{{$exampleServer}}", "{{$exampleServer}}"],
+  "isPremium": true,
+  "isFavorite": false,
+  "rating": {{$random.float(5)}},
+  "type": "{{$random.alphabetic(8)}}",
+  "roomsCounter": {{$random.integer(10)}},
+  "guestsCounter": {{$random.integer(10)}},
+  "cost": {{$random.integer(10000)}},
+  "amenities": ["{{$random.alphanumeric(10)}}", "{{$random.alphanumeric(10)}}", "{{$random.alphanumeric(10)}}"],
+  "userId": "648376b80aef7eea92e327fe",
+  "numberComments": {{$random.integer(1000)}},
+  "coordinates": {
+    "latitude": {{$random.float(5)}},
+    "longitude": {{$random.float(5)}}
+  }
+}

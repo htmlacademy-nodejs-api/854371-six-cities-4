@@ -56,8 +56,8 @@ export default class RestApplication {
     this.logger.info('Init database');
     await this._initDb();
     this.logger.info('Init database completed');
+    await this._initMiddleware();
     await this._initServer();
     await this._initRouters();
-    await this._initMiddleware();
   }
 }

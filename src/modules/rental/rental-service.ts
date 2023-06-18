@@ -16,9 +16,9 @@ export default class RentalService implements RentalServiceInterface {
     @inject(APPLICATION_DEPENDENCIES.RentalModel) private rentalModel: types.ModelType<RentalEntity>
   ) {}
 
-  create(dto: CreateRentalDto): Promise<DocumentType<RentalEntity>> {
-    const result = this.rentalModel.create(dto);
-    this.logger.info(`Rental offer created: ${dto.title}`);
+  async create(dto: CreateRentalDto): Promise<DocumentType<RentalEntity>> {
+    const result = await this.rentalModel.create(dto);
+    this.logger.info(`Rental offer created: ${result.title}`);
 
     return result;
   }
