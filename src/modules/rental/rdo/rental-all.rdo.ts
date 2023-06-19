@@ -1,20 +1,23 @@
 import { Expose } from 'class-transformer';
 
-export default class RentalRdo {
+export default class RentalAllRdo {
   @Expose()
   public id!: string;
 
   @Expose()
-  public createdAt!: string;
+  public title!: string;
 
   @Expose()
-  public title!: string;
+  public description!: string;
 
   @Expose()
   public city!: string;
 
   @Expose()
   public previewImage!: string;
+
+  @Expose()
+  public mainImages!: string[];
 
   @Expose()
   public isPremium!: boolean;
@@ -29,8 +32,26 @@ export default class RentalRdo {
   public type!: string;
 
   @Expose()
+  public roomsCounter!: number;
+
+  @Expose()
+  public guestsCounter!: number;
+
+  @Expose()
   public cost!: number;
 
   @Expose()
+  public amenities!: string[];
+
+  @Expose()
+  public userId!: string;
+
+  @Expose()
   public numberComments!: number;
+
+  @Expose()
+  public coordinates!: {
+    latitude: number,
+    longitude: number
+  };
 }

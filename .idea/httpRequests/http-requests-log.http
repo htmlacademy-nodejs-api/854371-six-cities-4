@@ -1,0 +1,183 @@
+DELETE http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T163108.404.json
+
+###
+
+DELETE http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T163042.200.json
+
+###
+
+PATCH http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Content-Type: application/json
+Content-Length: 22
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "costtt": 666666
+}
+
+<> 2023-06-19T160546.200.json
+
+###
+
+PATCH http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Content-Type: application/json
+Content-Length: 20
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "cost": 666666
+}
+
+<> 2023-06-19T160521.200.json
+
+###
+
+PATCH http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Content-Type: application/json
+Content-Length: 20
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "cost": 666666
+}
+
+<> 2023-06-19T160245.404.json
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T160241.200.json
+
+###
+
+PATCH http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Content-Type: application/json
+Content-Length: 20
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "cost": 666666
+}
+
+<> 2023-06-19T160149.404.json
+
+###
+
+GET http://localhost:3000/rental-offers/eW2Rlf15UiMjwwRl4wE65Rn0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T154505.404.json
+
+###
+
+GET http://localhost:3000/rental-offers/GtIZBrUSQPJgDUxhRfqZbBCT
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T154431.404.json
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T154429.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T154345.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/gopBOqYaSXAalvTRitDJTxdA
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T153356.404.json
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T153350.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-19T153227.200.json
+
+###
+
+POST http://localhost:3001/rental-offers/
+Content-Type: application/json
+Content-Length: 628
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "title": "pKPLpKGhZoxKKWj",
+  "description": "JrQvOpfhXviZGoJseWwCRtZHSImwKhqaGMIXrgiLOwvox",
+  "city": "ziUqSrkTCy",
+  "previewImage": "localhost:55127/http-client/examples",
+  "mainImages": ["localhost:55127/http-client/examples", "localhost:55127/http-client/examples"],
+  "isPremium": true,
+  "isFavorite": false,
+  "rating": 3.7295449,
+  "type": "OLcdxMlR",
+  "roomsCounter": 7,
+  "guestsCounter": 1,
+  "cost": 7715,
+  "amenities": ["QInlPtVosM", "wI0E96NDf4", "nRf4bfeA69"],
+  "userId": "648376b80aef7eea92e327fe",
+  "numberComments": 988,
+  "coordinates": {
+    "latitude": 1.2019014,
+    "longitude": 1.8105099
+  }
+}
+
+<> 2023-06-18T161121.201.json
+
+###
+

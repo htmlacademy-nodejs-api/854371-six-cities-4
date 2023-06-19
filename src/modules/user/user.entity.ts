@@ -15,11 +15,15 @@ export interface UserEntity extends defaultClasses.Base {}
 
 @modelOptions({
   schemaOptions: {
-    collection: 'users'
+    collection: 'users',
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
 })
 @injectable()
 export class UserEntity extends defaultClasses.TimeStamps implements User {
+  public id!: string;
+
   @prop({required: true, minlength: 1, maxlength: 15, default: ''})
   public name: string;
 

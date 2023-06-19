@@ -53,7 +53,7 @@ export default class RestApplication {
     this.logger.info('Global middleware initialization completed');
   }
 
-  private async _initExeptionFilters() {
+  private async _initExceptionFilters() {
     this.logger.info('Exception filters initialization');
     this.expressApplication.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
     this.logger.info('Exception filters completed');
@@ -67,6 +67,6 @@ export default class RestApplication {
     await this._initMiddleware();
     await this._initServer();
     await this._initRouters();
-    await this._initExeptionFilters();
+    await this._initExceptionFilters();
   }
 }

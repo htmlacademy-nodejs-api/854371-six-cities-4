@@ -1,4 +1,16 @@
-POST http://localhost:3001/rental-offers/
+GET http://localhost:3000/rental-offers/
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
+
+###
+
+GET http://localhost:3000/rental-offers/{{$random.alphanumeric(24)}}
+
+###
+
+POST http://localhost:3000/rental-offers/
 Content-Type: application/json
 
 {
@@ -22,3 +34,16 @@ Content-Type: application/json
     "longitude": {{$random.float(5)}}
   }
 }
+
+###
+
+PATCH http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Content-Type: application/json
+
+{
+  "costtt": 666666
+}
+
+###
+
+DELETE http://localhost:3000/rental-offers/648f6751572d72678f99d384

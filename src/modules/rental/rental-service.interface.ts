@@ -58,5 +58,5 @@ export interface RentalServiceInterface {
    * Удалить объявление с `offerId`
    * @param offerId id объявления
    */
-  deleteRental(offerId: string): Promise<DocumentType<RentalEntity> | null>
+  findByIdAndDelete(offerId: string): Promise<DocumentType<RentalEntity> | null>
 }

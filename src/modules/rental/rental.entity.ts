@@ -6,10 +6,14 @@ export interface RentalEntity extends defaultClasses.Base {}
 
 @modelOptions({
   schemaOptions: {
-    collection: 'offers'
+    collection: 'offers',
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
 })
 export class RentalEntity extends defaultClasses.TimeStamps implements RentalOffer {
+  public id!: string;
+
   @prop({
     required: true,
     minlength: 10,

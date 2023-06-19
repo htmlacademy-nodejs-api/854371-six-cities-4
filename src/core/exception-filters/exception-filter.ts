@@ -13,7 +13,7 @@ export default class ExceptionFilter implements ExceptionFilterInterface {
     this.logger.info('Register ExceptionFilter');
   }
 
-  catch(error: Error, _req: Request, res: Response, _next: NextFunction) {
+  catch(error: Error, _req: Request, res: Response, _next: NextFunction): void {
     this.logger.error(error.message);
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)

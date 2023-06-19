@@ -8,13 +8,15 @@ import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { getLimit, transformCityWord } from '../../common/offers.js';
 import UpdateRentalDto from './dto/update-rental.dto.js';
 import { MAX_RETURNED_OFFERS, MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY, SortType } from '../../common/const.js';
+import { checkId } from '../../common/utils.js';
 
 @injectable()
 export default class RentalService implements RentalServiceInterface {
   constructor(
     @inject(APPLICATION_DEPENDENCIES.LoggerInterface) private logger: LoggerInterface,
     @inject(APPLICATION_DEPENDENCIES.RentalModel) private rentalModel: types.ModelType<RentalEntity>
-  ) {}
+  ) {
+  }
 
   async create(dto: CreateRentalDto): Promise<DocumentType<RentalEntity>> {
     const result = await this.rentalModel.create(dto);
@@ -34,9 +36,15 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async findById(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    const result = await this.rentalModel.findById({offerId})
+    if (!checkId(offerId)) {
+      this.logger.info(`findById: ID ${offerId} incorrect`);
+      return null;
+    }
+
+    const result = await this.rentalModel.findById(offerId)
       .populate(['userId'])
       .exec();
+
     if (result) {
       this.logger.info(`findById: Returned the offer with ID ${offerId}`);
     } else {
@@ -47,7 +55,13 @@ export default class RentalService implements RentalServiceInterface {
 
   async findByCityAndPremium(city: string, limit?: number): Promise<DocumentType<RentalEntity>[] | null> {
     const transformedCityWord = transformCityWord(city);
-    const result = await this.rentalModel.find({city: transformedCityWord, isPremium: true}, null, {limit: getLimit(MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY, limit)});
+    const result = await this.rentalModel.find({
+      city: transformedCityWord,
+      isPremium: true
+    }, null, {limit: getLimit(MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY, limit)})
+      .sort({createdAt: SortType.DEC})
+      .exec();
+
     if (result) {
       this.logger.info(`findByCityAndPremium: Found ${result.length} premium offers for city ${transformedCityWord}`);
     } else {
@@ -58,7 +72,12 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async findByIdAndUpdate(offerId: string, dto: UpdateRentalDto): Promise<DocumentType<RentalEntity> | null> {
-    const result = await this.rentalModel.findOneAndUpdate({offerId}, dto, {new: true})
+    if (!checkId(offerId)) {
+      this.logger.info(`findByIdAndUpdate: ID ${offerId} incorrect`);
+      return null;
+    }
+
+    const result = await this.rentalModel.findByIdAndUpdate(offerId, dto, {new: true})
       .populate('userId')
       .sort({createdAt: SortType.DEC})
       .exec();
@@ -113,13 +132,20 @@ export default class RentalService implements RentalServiceInterface {
     return changedRentalOffer;
   }
 
-  async deleteRental(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+  async findByIdAndDelete(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+    if (!checkId(offerId)) {
+      this.logger.info(`delete: ID ${offerId} incorrect`);
+      return null;
+    }
+
     const result = await this.rentalModel.findByIdAndDelete(offerId);
+
     if (result) {
       this.logger.info(`delete: The offer with ID ${offerId} has been deleted`);
     } else {
       this.logger.info(`delete: The offer with ID ${offerId} was not found`);
     }
+
     return result;
   }
 }

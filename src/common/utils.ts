@@ -1,5 +1,6 @@
 import * as crypto from 'node:crypto';
 import { ClassConstructor, plainToInstance } from 'class-transformer';
+import mongoose from 'mongoose';
 
 export function getRandomValue(min: number, max: number): number {
   return Math.round(Math.random() * (max - min)) + min;
@@ -32,4 +33,8 @@ export function createSha256(line: string, salt: string) {
 
 export function fillDto<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
   return plainToInstance(someDto, plainObject, {excludeExtraneousValues: true});
+}
+
+export function checkId(id: string) {
+  return mongoose.Types.ObjectId.isValid(id);
 }
