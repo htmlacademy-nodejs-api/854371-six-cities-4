@@ -10,5 +10,6 @@ export const APPLICATION_DEPENDENCIES = {
   CommentServiceInterface: Symbol.for('CommentServiceInterface'),
   CommentModel: Symbol.for('CommentModel'),
   RentalController: Symbol.for('RentalController'),
-  ExceptionFilter: Symbol.for('ExceptionFilter')
+  RentalSpecialController: Symbol.for('RentalSpecialController'),
+  ExceptionFilter: Symbol.for('ExceptionFilter'),
 } as const;

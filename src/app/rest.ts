@@ -17,6 +17,7 @@ export default class RestApplication {
     @inject(APPLICATION_DEPENDENCIES.ConfigService) private config: ConfigInterface<RestSchema>,
     @inject(APPLICATION_DEPENDENCIES.DatabaseClientInterface) private dbClient: DatabaseClientInterface,
     @inject(APPLICATION_DEPENDENCIES.RentalController) private rentalController: ControllerInterface,
+    @inject(APPLICATION_DEPENDENCIES.RentalSpecialController) private rentalSpecialController: ControllerInterface,
     @inject(APPLICATION_DEPENDENCIES.ExceptionFilter) private exceptionFilter: ExceptionFilter
   ) {
     this.expressApplication = express();
@@ -44,6 +45,7 @@ export default class RestApplication {
   private async _initRouters() {
     this.logger.info('Controller initialization…');
     this.expressApplication.use('/rental-offers', this.rentalController.router);
+    this.expressApplication.use('/city-favorite-offers', this.rentalSpecialController.router);
     this.logger.info('Controller initialization completed');
   }
 

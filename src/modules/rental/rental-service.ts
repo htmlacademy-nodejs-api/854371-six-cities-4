@@ -116,6 +116,11 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async changeFavoriteFlag(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+    if (!checkId(offerId)) {
+      this.logger.info(`changeFavoriteFlag: ID ${offerId} incorrect`);
+      return null;
+    }
+
     const rentalOffer = await this.findById(offerId);
 
     if (!rentalOffer) {
@@ -123,11 +128,11 @@ export default class RentalService implements RentalServiceInterface {
       return null;
     }
 
-    const changedRentalOffer = await this.rentalModel.findOneAndUpdate({offerId}, {isFavorite: !rentalOffer.isFavorite}, {new: true})
+    const changedRentalOffer = await this.rentalModel.findByIdAndUpdate(offerId, {isFavorite: !rentalOffer.isFavorite}, {new: true})
       .populate(['userId'])
       .exec();
 
-    this.logger.info('');
+    this.logger.info(`changeFavoriteFlag: The offer with ID ${offerId} has been updated`);
 
     return changedRentalOffer;
   }
