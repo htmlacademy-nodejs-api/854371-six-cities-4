@@ -38,3 +38,9 @@ export function fillDto<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
 export function checkId(id: string) {
   return mongoose.Types.ObjectId.isValid(id);
 }
+
+export function createError(message: string) {
+  return {
+    error: message
+  };
+}

@@ -1,3 +1,4 @@
+import asyncHandler from 'express-async-handler';
 import { ControllerInterface } from './controller-interface.js';
 import { injectable } from 'inversify';
 import { Response, Router } from 'express';
@@ -20,7 +21,7 @@ export default abstract class ControllerAbstract implements ControllerInterface 
   }
 
   public addRoute(route: RouteInterface) {
-    this._router[route.method](route.path, route.next.bind(this));
+    this._router[route.method](route.path, asyncHandler(route.next.bind(this)));
     this.logger.info(`Route registered: ${route.method.toUpperCase()} ${route.path}`);
   }
 

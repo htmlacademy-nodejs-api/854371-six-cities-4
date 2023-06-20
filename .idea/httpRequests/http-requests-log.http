@@ -13,6 +13,25 @@ Accept-Encoding: br,deflate,gzip,x-gzip
   "userType": "pro"
 }
 
+<> 2023-06-21T001542.500.json
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "Harry",
+  "password": "avada-kedavra",
+  "email": "harry.potter@hogwarts.edu",
+  "avatarUrl": "localhost:62489/http-client/examples/harry.png",
+  "userType": "pro"
+}
+
 <> 2023-06-21T000332.409.json
 
 ###
