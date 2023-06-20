@@ -12,6 +12,7 @@ import RentalAllRdo from './rdo/rental-all.rdo.js';
 import CreateRentalDto from './dto/create-rental.dto.js';
 import { StatusCodes } from 'http-status-codes';
 import UpdateRentalDto from './dto/update-rental.dto.js';
+import HttpError from '../../core/errors/http-error.js';
 
 @injectable()
 export default class RentalController extends ControllerAbstract {
@@ -46,8 +47,7 @@ export default class RentalController extends ControllerAbstract {
     const rental = await this.rentalService.findById(offerId);
 
     if (!rental) {
-      this.send(res, StatusCodes.NOT_FOUND, {error: `The offer with ID ${offerId} was not found`});
-      return;
+      throw new HttpError(StatusCodes.NOT_FOUND, `The offer with ID ${offerId} was not found`);
     }
 
     const rentalToResponse = fillDto(RentalAllRdo, rental);
@@ -61,8 +61,7 @@ export default class RentalController extends ControllerAbstract {
     const updatedRental = await this.rentalService.findByIdAndUpdate(offerId, body);
 
     if (!updatedRental) {
-      this.send(res, StatusCodes.NOT_FOUND, {error: `The offer with ID ${offerId} was not found`});
-      return;
+      throw new HttpError(StatusCodes.NOT_FOUND, `The offer with ID ${offerId} was not found`);
     }
 
     const updatedRentalToResponse = fillDto(RentalAllRdo, updatedRental);
@@ -75,7 +74,7 @@ export default class RentalController extends ControllerAbstract {
     const deletedRental = await this.rentalService.findByIdAndDelete(offerId);
 
     if (!deletedRental) {
-      this.send(res, StatusCodes.NOT_FOUND, {error: `The offer with ID ${offerId} was not found`});
+      throw new HttpError(StatusCodes.NOT_FOUND, `The offer with ID ${offerId} was not found`);
     }
 
     const deletedRentalToResponse = fillDto(RentalShortRdo, deletedRental);

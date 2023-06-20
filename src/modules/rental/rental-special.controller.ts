@@ -8,6 +8,7 @@ import { Request, Response } from 'express';
 import { fillDto } from '../../common/utils.js';
 import RentalShortRdo from './rdo/rental-short.rdo.js';
 import { StatusCodes } from 'http-status-codes';
+import HttpError from '../../core/errors/http-error.js';
 
 @injectable()
 export default class RentalSpecialController extends ControllerAbstract {
@@ -54,7 +55,7 @@ export default class RentalSpecialController extends ControllerAbstract {
       const updatedRentalToResponse = fillDto(RentalShortRdo, updatedRental);
       this.ok(res, updatedRentalToResponse);
     } else {
-      this.send(res, StatusCodes.NOT_FOUND, {error: `The offer with ID ${offerId} was not found`});
+      throw new HttpError(StatusCodes.NOT_FOUND, `The offer with ID ${offerId} was not found`);
     }
   }
 }

@@ -10,6 +10,7 @@ import ConfigService from '../../core/config/config.service.js';
 import { StatusCodes } from 'http-status-codes';
 import { fillDto } from '../../common/utils.js';
 import UserRdo from './rdo/user.rdo.js';
+import HttpError from '../../core/errors/http-error.js';
 
 @injectable()
 export default class UserController extends ControllerAbstract {
@@ -29,8 +30,7 @@ export default class UserController extends ControllerAbstract {
     const result = await this.userService.findOrCreate(body, salt);
 
     if (!result) {
-      this.send(res, StatusCodes.CONFLICT, {error: `User with email ${body.email} already exist`});
-      return;
+      throw new HttpError(StatusCodes.CONFLICT, `User with email ${body.email} already exist`);
     }
 
     const createdUserToResponse = fillDto(UserRdo, result);
