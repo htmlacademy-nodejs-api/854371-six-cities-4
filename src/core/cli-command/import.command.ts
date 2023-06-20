@@ -44,10 +44,12 @@ export default class ImportCommand {
 
   private async saveRentalOffer(rentalOffer: RentalOffer) {
     const createdUser = await this.findOrCreateUser();
-    await this.rentalService.create({
-      ...rentalOffer,
-      userId: createdUser.id
-    });
+    if (createdUser) {
+      await this.rentalService.create({
+        ...rentalOffer,
+        userId: createdUser.id
+      });
+    }
   }
 
   private async oneLine(line: string, resolve: () => void) {
