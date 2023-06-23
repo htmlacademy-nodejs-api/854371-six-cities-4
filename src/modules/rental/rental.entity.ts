@@ -56,13 +56,6 @@ export class RentalEntity extends defaultClasses.TimeStamps implements RentalOff
   public isFavorite!: boolean;
 
   @prop({
-    required: true,
-    min: 1,
-    max: 5
-  })
-  public rating!: number;
-
-  @prop({
     required: true
   })
   public type!: HouseType;
@@ -97,11 +90,6 @@ export class RentalEntity extends defaultClasses.TimeStamps implements RentalOff
     ref: UserEntity
   })
   public userId!: Ref<UserEntity>;
-
-  @prop({
-    required: false
-  })
-  public numberComments!: number;
 
   @prop({
     required: true

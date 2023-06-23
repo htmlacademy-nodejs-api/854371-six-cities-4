@@ -13,6 +13,7 @@ import CreateRentalDto from './dto/create-rental.dto.js';
 import { StatusCodes } from 'http-status-codes';
 import UpdateRentalDto from './dto/update-rental.dto.js';
 import HttpError from '../../core/errors/http-error.js';
+import { ValidateObjectIdMiddleware } from '../../core/middlewares/validate-objectId.middleware.js';
 
 @injectable()
 export default class RentalController extends ControllerAbstract {
@@ -25,9 +26,24 @@ export default class RentalController extends ControllerAbstract {
 
     this.addRoute({path: '/', method: HttpMethod.Get, next: this.index});
     this.addRoute({path: '/', method: HttpMethod.Post, next: this.create});
-    this.addRoute({path: '/:offerId', method: HttpMethod.Get, next: this.getInfo});
-    this.addRoute({path: '/:offerId', method: HttpMethod.Patch, next: this.edit});
-    this.addRoute({path: '/:offerId', method: HttpMethod.Delete, next: this.remove});
+    this.addRoute({
+      path: '/:offerId',
+      method: HttpMethod.Get,
+      next: this.getInfo,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
+    });
+    this.addRoute({
+      path: '/:offerId',
+      method: HttpMethod.Patch,
+      next: this.edit,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
+    });
+    this.addRoute({
+      path: '/:offerId',
+      method: HttpMethod.Delete,
+      next: this.remove,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
+    });
   }
 
   public async index(_req: Request, res: Response): Promise<void> {
@@ -42,12 +58,11 @@ export default class RentalController extends ControllerAbstract {
     this.created(res, fillDto(RentalAllRdo, result));
   }
 
-  public async getInfo(req: Request, res: Response): Promise<void> {
-    const offerId = req.params.offerId;
-    const rental = await this.rentalService.findById(offerId);
+  public async getInfo({params}: Request, res: Response): Promise<void> {
+    const rental = await this.rentalService.findById(params.offerId);
 
     if (!rental) {
-      throw new HttpError(StatusCodes.NOT_FOUND, `The offer with ID ${offerId} was not found`);
+      throw new HttpError(StatusCodes.NOT_FOUND, `The offer with ID ${params.offerId} was not found`);
     }
 
     const rentalToResponse = fillDto(RentalAllRdo, rental);

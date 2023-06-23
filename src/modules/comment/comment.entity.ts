@@ -1,8 +1,8 @@
-import { defaultClasses, getModelForClass, modelOptions, post, prop, Ref } from '@typegoose/typegoose';
+import { defaultClasses, getModelForClass, modelOptions, prop, Ref } from '@typegoose/typegoose';
 import { Comment } from '../../types/comment.js';
 import { UserEntity } from '../user/user.entity.js';
 import { RentalEntity } from '../rental/rental.entity.js';
-import { DECIMAL_PLACES_COUNT, Field } from '../../common/const.js';
+// import { DECIMAL_PLACES_COUNT, Field } from '../../common/const.js';
 
 export interface CommentEntity extends defaultClasses.Base {}
 
@@ -11,7 +11,7 @@ export interface CommentEntity extends defaultClasses.Base {}
     collection: 'comments'
   }
 })
-@post<CommentEntity>('save', async function() {
+/*@post<CommentEntity>('save', async function() {
   const CommentModel = getModelForClass(CommentEntity);
   const RentalModel = getModelForClass(RentalEntity);
 
@@ -27,7 +27,7 @@ export interface CommentEntity extends defaultClasses.Base {}
 
     await rental.save();
   }
-})
+})*/
 export class CommentEntity extends defaultClasses.TimeStamps implements Comment {
   @prop({
     required: true,

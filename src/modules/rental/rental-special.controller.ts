@@ -9,6 +9,7 @@ import { fillDto } from '../../common/utils.js';
 import RentalShortRdo from './rdo/rental-short.rdo.js';
 import { StatusCodes } from 'http-status-codes';
 import HttpError from '../../core/errors/http-error.js';
+import { ValidateObjectIdMiddleware } from '../../core/middlewares/validate-objectId.middleware.js';
 
 @injectable()
 export default class RentalSpecialController extends ControllerAbstract {
@@ -21,7 +22,12 @@ export default class RentalSpecialController extends ControllerAbstract {
 
     this.addRoute({path: '/', method: HttpMethod.Get, next: this.index});
     this.addRoute({path: '/:city', method: HttpMethod.Get, next: this.getPremiumRentalsByCity});
-    this.addRoute({path: '/:offerId', method: HttpMethod.Post, next: this.changeFavoriteStatus});
+    this.addRoute({
+      path: '/:offerId',
+      method: HttpMethod.Post,
+      next: this.changeFavoriteStatus,
+      middlewares: [new ValidateObjectIdMiddleware('offerId')]
+    });
   }
 
   public async index(_req: Request, res: Response): Promise<void> {
@@ -47,8 +53,8 @@ export default class RentalSpecialController extends ControllerAbstract {
     }
   }
 
-  public async changeFavoriteStatus(req: Request, res: Response): Promise<void> {
-    const offerId = req.params.offerId;
+  public async changeFavoriteStatus({params}: Request, res: Response): Promise<void> {
+    const offerId = params.offerId;
     const updatedRental = await this.rentalService.changeFavoriteFlag(offerId);
 
     if (updatedRental) {

@@ -9,13 +9,11 @@ export function createOffer(offerData: string): RentalOffer {
     mainImages,
     isPremium,
     isFavorite,
-    rating,
     type,
     roomsCounter,
     guestsCounter,
     cost,
     amenities,
-    numberComments,
     coordinates
   ] = offerData.replace('\n', '').split('\t');
 
@@ -28,13 +26,11 @@ export function createOffer(offerData: string): RentalOffer {
     mainImages: mainImages.split(';'),
     isPremium: isPremium === 'true',
     isFavorite: isFavorite === 'true',
-    rating: parseFloat(rating),
     type: type,
     roomsCounter: parseInt(roomsCounter, 10),
     guestsCounter: parseInt(guestsCounter, 10),
     cost: parseInt(cost, 10),
     amenities: amenities.split(';'),
-    numberComments: parseInt(numberComments, 10),
     coordinates: {
       latitude: coordinatesArray[0],
       longitude: coordinatesArray[1]
@@ -50,7 +46,5 @@ export function getLimit(maxLimit: number, limit?: number): number {
 }
 
 export function transformCityWord(city: string): string {
-  const cityLetters = city.trim().split('');
-  cityLetters[0].toUpperCase();
-  return cityLetters.join('');
+  return `${city[0].toUpperCase()}${city.substring(1)}`;
 }

@@ -33,13 +33,11 @@ export type RentalOffer = {
   mainImages: MainImages;
   isPremium: boolean;
   isFavorite: boolean;
-  rating: number;
   type: HouseType;
   roomsCounter: number;
   guestsCounter: number;
   cost: number;
   amenities: Amenity[];
   userId: Ref<UserEntity>;
-  numberComments: number;
   coordinates: Coordinates;
 }

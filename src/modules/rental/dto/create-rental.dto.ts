@@ -6,14 +6,12 @@ export default class CreateRentalDto {
   public mainImages!: string[];
   public isPremium!: boolean;
   public isFavorite!: boolean;
-  public rating!: number;
   public type!: string;
   public roomsCounter!: number;
   public guestsCounter!: number;
   public cost!: number;
   public amenities!: string[];
   public userId!: string;
-  public numberComments!: number;
   public coordinates!: {
     latitude: number,
     longitude: number

@@ -8,7 +8,6 @@ import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { getLimit, transformCityWord } from '../../common/offers.js';
 import UpdateRentalDto from './dto/update-rental.dto.js';
 import { MAX_RETURNED_OFFERS, MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY, SortType } from '../../common/const.js';
-import { checkId } from '../../common/utils.js';
 
 @injectable()
 export default class RentalService implements RentalServiceInterface {
@@ -36,11 +35,6 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async findById(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    if (!checkId(offerId)) {
-      this.logger.info(`findById: ID ${offerId} incorrect`);
-      return null;
-    }
-
     const result = await this.rentalModel.findById(offerId)
       .populate(['userId'])
       .exec();
@@ -72,11 +66,6 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async findByIdAndUpdate(offerId: string, dto: UpdateRentalDto): Promise<DocumentType<RentalEntity> | null> {
-    if (!checkId(offerId)) {
-      this.logger.info(`findByIdAndUpdate: ID ${offerId} incorrect`);
-      return null;
-    }
-
     const result = await this.rentalModel.findByIdAndUpdate(offerId, dto, {new: true})
       .populate('userId')
       .sort({createdAt: SortType.DEC})
@@ -116,10 +105,6 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async changeFavoriteFlag(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    if (!checkId(offerId)) {
-      this.logger.info(`changeFavoriteFlag: ID ${offerId} incorrect`);
-      return null;
-    }
 
     const rentalOffer = await this.findById(offerId);
 
@@ -138,10 +123,6 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async findByIdAndDelete(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    if (!checkId(offerId)) {
-      this.logger.info(`delete: ID ${offerId} incorrect`);
-      return null;
-    }
 
     const result = await this.rentalModel.findByIdAndDelete(offerId);
 
