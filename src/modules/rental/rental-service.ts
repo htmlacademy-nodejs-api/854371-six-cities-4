@@ -134,4 +134,8 @@ export default class RentalService implements RentalServiceInterface {
 
     return result;
   }
+
+  async exist(offerId: string): Promise<boolean> {
+    return (await this.rentalModel.exists({_id: offerId})) !== null;
+  }
 }

@@ -6,11 +6,9 @@ import {
   MAX_BEDROOMS,
   MAX_PRICE_PER_NIGHT,
   MAX_RANDOM_VALUE_FOR_BOOL,
-  MAX_RATING,
   MIN_BEDROOMS,
   MIN_PRICE_PER_NIGHT,
   MIN_RANDOM_VALUE,
-  MIN_RATING,
   MODULO_FOR_GUESTS,
   MULTIPLIER_FOR_GUESTS,
   PRICE_MULTIPLIER
@@ -30,16 +28,14 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const photoUrls = getRandomItem<string>(this.mockData.photoUrls);
     const isPremium = String(!!getRandomValue(MIN_RANDOM_VALUE, MAX_RANDOM_VALUE_FOR_BOOL));
     const isFavorite = String(!!getRandomValue(MIN_RANDOM_VALUE, MAX_RANDOM_VALUE_FOR_BOOL));
-    const rating = String(getRandomValue(MIN_RATING, MAX_RATING));
     const propertyType = getRandomItem<string>(this.mockData.propertyType);
     const numberOfBedrooms = String(getRandomValue(MIN_BEDROOMS, MAX_BEDROOMS));
     const numberOfGuests = String((+numberOfBedrooms * MULTIPLIER_FOR_GUESTS) % MODULO_FOR_GUESTS);
     const pricePerNight = String(getRandomValue(MIN_PRICE_PER_NIGHT, MAX_PRICE_PER_NIGHT) * PRICE_MULTIPLIER);
     const amenities = createdAmenities ? createdAmenities : 'Washer';
-    const commentsCounter = 0;
     const coordinates = [CitiesLocation[city].latitude, CitiesLocation[city].longitude].join(';');
 
-    return [title, description, city, previewUrl, photoUrls, isPremium, isFavorite, rating, propertyType,
-      numberOfBedrooms, numberOfGuests, pricePerNight, amenities, commentsCounter, coordinates].join('\t');
+    return [title, description, city, previewUrl, photoUrls, isPremium, isFavorite, propertyType,
+      numberOfBedrooms, numberOfGuests, pricePerNight, amenities, coordinates].join('\t');
   }
 }

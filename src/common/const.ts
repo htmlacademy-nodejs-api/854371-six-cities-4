@@ -44,7 +44,7 @@ export const DECIMAL_PLACES_COUNT = 2;
 
 export const REGULAR_EXPRESSION = {
   CheckEmail: /^[a-zA-Z]*@[a-zA-Z]*$/,
-  CheckPhotoPath: /^(https?:\/\/)?[\w.-]+(:\d+)?\/[a-zA-Z-]+\/[a-zA-Z-]+\/[a-zA-Z-]+\.(jpg|png)$/
+  CheckPhotoPath: /^(https?:\/\/)?[\w.-]+(:\d+)?\/[a-zA-Z-]+\/[a-zA-Z-]+\/[a-zA-Z-]+\.(jpg|png)(\?[a-zA-Z0-9=&-]+)?$/
 };
 
 export const MAX_RETURNED_OFFERS = 60;

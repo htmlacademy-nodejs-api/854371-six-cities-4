@@ -1,3 +1,21 @@
+GET http://localhost:3000/rental-offers/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-24T151013.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-24T150908.404.json
+
+###
+
 GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)

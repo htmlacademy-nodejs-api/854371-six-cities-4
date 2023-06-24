@@ -2,8 +2,9 @@ import CreateRentalDto from './dto/create-rental.dto.js';
 import { DocumentType } from '@typegoose/typegoose';
 import { RentalEntity } from './rental.entity.js';
 import UpdateRentalDto from './dto/update-rental.dto.js';
+import { DocumentExistsInterface } from '../../types/document-exists.interface.js';
 
-export interface RentalServiceInterface {
+export interface RentalServiceInterface extends DocumentExistsInterface {
   /**
    * Создать объявление об аренде
    * @param dto объект с данными объявления
