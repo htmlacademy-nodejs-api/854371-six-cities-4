@@ -1,5 +1,5 @@
 {
-  "offers": {
+  "api": {
     "title": [
       "Bright apartment in city center",
       "Cozy cottage on the outskirts",
@@ -78,7 +78,9 @@
       "Paris",
       "Cologne",
       "Brussels",
-      "Amsterdam"
+      "Amsterdam",
+      "Hamburg",
+      "Dusseldorf"
     ],
     "previewUrl": [
       "https://preview1.com",
@@ -92,7 +94,7 @@
       "https://photo13.com;https://photo14.com;https://photo15.com;https://photo16.com;https://photo17.com;https://photo18.com",
       "https://photo19.com;https://photo20.com;https://photo21.com;https://photo22.com;https://photo23.com;https://photo24.com"
     ],
-    "propertyType": [
+    "housingType": [
       "apartment",
       "house",
       "hotel",
@@ -106,6 +108,34 @@
       "Washer",
       "Towels",
       "Fridge"
+    ],
+    "users": [
+      "Nina Wagner",
+      "Alex Freeman",
+      "Hallie Cooper",
+      "Maud Manning",
+      "Kate Fleming",
+      "Sam Lawson",
+      "Verna Graham",
+      "Isabel Salazar",
+      "Joe Martin",
+      "Leona Elliott",
+      "Ernest Swanson",
+      "Edna Fowler",
+      "Isaac Tate",
+      "Jesse Lindsey",
+      "Isaiah Lindsey"
+    ],
+    "email": [
+      "snow@pisem.local",
+      "president@dka.local",
+      "fish@big.local",
+      "test@pisem.local",
+      "freedom@pisem.local",
+      "rolan@pochta.local",
+      "author@mir.local",
+      "test@lost.loca",
+      "kujo-fan@story.local"
     ]
   }
 }

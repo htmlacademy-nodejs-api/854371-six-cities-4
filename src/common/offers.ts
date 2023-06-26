@@ -2,19 +2,9 @@ import { RentalOffer } from '../types/rental-offer.js';
 
 export function createOffer(offerData: string): RentalOffer {
   const [
-    title,
-    description,
-    city,
-    previewImage,
-    mainImages,
-    isPremium,
-    isFavorite,
-    type,
-    roomsCounter,
-    guestsCounter,
-    cost,
-    amenities,
-    coordinates
+    title, description, city, previewImage, mainImages, isPremium, isFavorite,
+    housingType, roomsCounter, guestsCounter, rentalCost, amenities, coordinates,
+    username, email, userType,
   ] = offerData.replace('\n', '').split('\t');
 
   const coordinatesArray = coordinates.split(';').map((coordinate) => parseFloat(coordinate));
@@ -26,11 +16,18 @@ export function createOffer(offerData: string): RentalOffer {
     mainImages: mainImages.split(';'),
     isPremium: isPremium === 'true',
     isFavorite: isFavorite === 'true',
-    type: type,
+    rating: 0,
+    housingType: housingType,
     roomsCounter: parseInt(roomsCounter, 10),
     guestsCounter: parseInt(guestsCounter, 10),
-    cost: parseInt(cost, 10),
+    rentalCost: parseInt(rentalCost, 10),
     amenities: amenities.split(';'),
+    user: {
+      name: username,
+      email: email,
+      userType,
+    },
+    commentsNumber: 0,
     coordinates: {
       latitude: coordinatesArray[0],
       longitude: coordinatesArray[1]

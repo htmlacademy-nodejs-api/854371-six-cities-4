@@ -4,7 +4,8 @@ export type MockData = {
   city: string[];
   previewUrl: string[];
   photoUrls: string[];
-  propertyType: string[];
+  housingType: string[];
   amenities: string[];
-  commentsCounter: number[];
+  users: string[];
+  email: string[];
 }

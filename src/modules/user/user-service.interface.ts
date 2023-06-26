@@ -22,7 +22,7 @@ export interface UserServiceInterface {
    * @param dto объект с данными пользователя
    * @param salt строка для кодирования паролей
    */
-  findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity> | null>
+  findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>>
 
   /**
    * Обновить пользователя в базе данных

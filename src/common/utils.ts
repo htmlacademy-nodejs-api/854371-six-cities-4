@@ -6,8 +6,8 @@ export function getRandomValue(min: number, max: number): number {
 }
 
 export function getRandomItems<T>(items: T[]): T[] {
-  const start = getRandomValue(0, items.length - 1);
-  const end = getRandomValue(start, items.length - 1);
+  const start = getRandomValue(1, items.length - 1);
+  const end = getRandomValue(start + 1, items.length - 1);
 
   return items.slice(start, end);
 }

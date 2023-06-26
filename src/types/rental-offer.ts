@@ -1,22 +1,30 @@
-import { CitiesLocation } from '../common/const.js';
-import { Ref } from '@typegoose/typegoose';
-import { UserEntity } from '../modules/user/user.entity.js';
+import {AutoUserType} from './auto-user.js';
 
-export type Cities = keyof typeof CitiesLocation;
-export type HouseType =
-  | 'apartment'
-  | 'house'
-  | 'room'
-  | 'hotel';
+export enum City {
+  PARIS = 'Paris',
+  COLOGNE = 'Cologne',
+  BRUSSELS = 'Brussels',
+  AMSTERDAM = 'Amsterdam',
+  HAMBURG = 'Hamburg',
+  DUSSELDORF = 'Dusseldorf',
+}
 
-export type Amenity =
-  | 'Breakfast'
-  | 'Air conditioning'
-  | 'Laptop friendly workspace'
-  | 'Baby seat'
-  | 'Washer'
-  | 'Towels'
-  | 'Fridge';
+export enum HouseType {
+  APARTMENT = 'apartment',
+  HOUSE = 'house',
+  ROOM = 'room',
+  HOTEL = 'hotel',
+}
+
+export enum Amenity {
+  BREAKFAST = 'Breakfast',
+  AIR_CONDITIONING = 'Air conditioning',
+  LAPTOP_FRIENDLY_WORKSPACE = 'Laptop friendly workspace',
+  BABY_SEAT = 'Baby seat',
+  WASHER = 'Washer',
+  TOWELS = 'Towels',
+  FRIDGE = 'Fridge',
+}
 
 export type Coordinates = {
   latitude: number;
@@ -28,16 +36,19 @@ export type MainImages = [string, string, string, string, string, string]
 export type RentalOffer = {
   title: string;
   description: string;
-  city: Cities;
+  cost: number;
+  city: City;
   previewImage: string;
   mainImages: MainImages;
   isPremium: boolean;
   isFavorite: boolean;
-  type: HouseType;
+  rating: number;
+  housingType: HouseType;
   roomsCounter: number;
   guestsCounter: number;
-  cost: number;
+  rentalCost: number;
   amenities: Amenity[];
-  userId: Ref<UserEntity>;
+  user: AutoUserType;
+  commentsNumber: number;
   coordinates: Coordinates;
 }

@@ -1,3 +1,5 @@
+import { Amenity, Coordinates, HouseType } from '../../../types/rental-offer.js';
+
 export default class CreateRentalDto {
   public title!: string;
   public description!: string;
@@ -6,14 +8,12 @@ export default class CreateRentalDto {
   public mainImages!: string[];
   public isPremium!: boolean;
   public isFavorite!: boolean;
-  public type!: string;
+  public housingType!: HouseType;
   public roomsCounter!: number;
   public guestsCounter!: number;
   public cost!: number;
-  public amenities!: string[];
+  public rentalCost!: number;
+  public amenities!: Amenity[];
   public userId!: string;
-  public coordinates!: {
-    latitude: number,
-    longitude: number
-  };
+  public coordinates!: Coordinates;
 }

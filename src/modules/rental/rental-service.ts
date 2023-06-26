@@ -138,4 +138,10 @@ export default class RentalService implements RentalServiceInterface {
   async exist(offerId: string): Promise<boolean> {
     return (await this.rentalModel.exists({_id: offerId})) !== null;
   }
+
+  public async incCommentCount(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+    return this.rentalModel
+      .findByIdAndUpdate(offerId, {'$inc': {commentsNumber: 1}})
+      .exec();
+  }
 }

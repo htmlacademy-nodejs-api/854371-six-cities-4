@@ -29,7 +29,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   private password?: string = '';
 
   @prop({default: 'https://api.dicebear.com/6.x/bottts/jpg'})
-  public avatarUrl: string;
+  public avatarUrl?: string;
 
   @prop({enum: UserType, required: true})
   public userType: 'base' | 'pro';
