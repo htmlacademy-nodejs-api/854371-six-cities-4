@@ -68,3 +68,5 @@ export const SortType = {
   DEC: 1,
   INC: -1
 } as const;
+
+export const DEFAULT_OBJECT_TO_RESPONSE = {};

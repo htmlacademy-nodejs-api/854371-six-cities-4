@@ -1,4 +1,5 @@
 import { inject, injectable } from 'inversify';
+import { DEFAULT_OBJECT_TO_RESPONSE } from '../../common/const.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
@@ -7,8 +8,6 @@ import { HttpMethod } from '../../types/http-method.js';
 import { Request, Response } from 'express';
 import { fillDto } from '../../common/utils.js';
 import RentalShortRdo from './rdo/rental-short.rdo.js';
-import { StatusCodes } from 'http-status-codes';
-import HttpError from '../../core/errors/http-error.js';
 import { ValidateObjectIdMiddleware } from '../../core/middlewares/validate-objectId.middleware.js';
 
 @injectable()
@@ -37,7 +36,7 @@ export default class RentalSpecialController extends ControllerAbstract {
       const favoriteRentalsToResponse = fillDto(RentalShortRdo, favoriteRentals);
       this.ok(res, favoriteRentalsToResponse);
     } else {
-      this.ok(res, {});
+      this.ok(res, DEFAULT_OBJECT_TO_RESPONSE);
     }
   }
 
@@ -49,7 +48,7 @@ export default class RentalSpecialController extends ControllerAbstract {
       const premiumRentalsToResponse = fillDto(RentalShortRdo, premiumRentals);
       this.ok(res, premiumRentalsToResponse);
     } else {
-      this.ok(res, {});
+      this.ok(res, DEFAULT_OBJECT_TO_RESPONSE);
     }
   }
 
@@ -57,11 +56,7 @@ export default class RentalSpecialController extends ControllerAbstract {
     const offerId = params.offerId;
     const updatedRental = await this.rentalService.changeFavoriteFlag(offerId);
 
-    if (updatedRental) {
-      const updatedRentalToResponse = fillDto(RentalShortRdo, updatedRental);
-      this.ok(res, updatedRentalToResponse);
-    } else {
-      throw new HttpError(StatusCodes.NOT_FOUND, `The offer with ID ${offerId} was not found`);
-    }
+    const updatedRentalToResponse = fillDto(RentalShortRdo, updatedRental);
+    this.ok(res, updatedRentalToResponse);
   }
 }

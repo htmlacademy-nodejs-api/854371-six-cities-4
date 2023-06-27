@@ -19,6 +19,7 @@ export default class RestApplication {
     @inject(APPLICATION_DEPENDENCIES.RentalController) private rentalController: ControllerInterface,
     @inject(APPLICATION_DEPENDENCIES.RentalSpecialController) private rentalSpecialController: ControllerInterface,
     @inject(APPLICATION_DEPENDENCIES.UserController) private userController: ControllerInterface,
+    @inject(APPLICATION_DEPENDENCIES.CommentController) private commentController: ControllerInterface,
     @inject(APPLICATION_DEPENDENCIES.ExceptionFilter) private exceptionFilter: ExceptionFilter
   ) {
     this.expressApplication = express();
@@ -48,6 +49,7 @@ export default class RestApplication {
     this.expressApplication.use('/rental-offers', this.rentalController.router);
     this.expressApplication.use('/city-favorite-offers', this.rentalSpecialController.router);
     this.expressApplication.use('/users', this.userController.router);
+    this.expressApplication.use('/comments', this.commentController.router);
     this.logger.info('Controller initialization completed');
   }
 

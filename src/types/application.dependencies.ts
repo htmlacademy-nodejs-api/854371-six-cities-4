@@ -12,5 +12,6 @@ export const APPLICATION_DEPENDENCIES = {
   RentalController: Symbol.for('RentalController'),
   RentalSpecialController: Symbol.for('RentalSpecialController'),
   UserController: Symbol.for('UserController'),
+  CommentController: Symbol.for('CommentController'),
   ExceptionFilter: Symbol.for('ExceptionFilter'),
 } as const;

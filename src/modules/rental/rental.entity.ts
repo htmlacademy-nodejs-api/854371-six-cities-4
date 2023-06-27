@@ -104,7 +104,7 @@ export class RentalEntity extends defaultClasses.TimeStamps {
 
   @prop({
     required: true,
-    ref: UserEntity
+    ref: UserEntity,
   })
   public userId!: Ref<UserEntity>;
 
