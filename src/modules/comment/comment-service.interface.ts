@@ -5,9 +5,10 @@ import { CommentEntity } from './comment.entity.js';
 export interface CommentServiceInterface {
   /**
    * Создать комментарий
+   * @param offerId
    * @param dto данные для создания комментария
    */
-  createComment(dto: CreateCommentDto): Promise<DocumentType<CommentEntity> | null>
+  createComment(dto: Omit<CreateCommentDto, 'offerId'>, offerId: string): Promise<DocumentType<CommentEntity> | null>
 
   /**
    * Найти все комментарии для оффера с id `offerId`

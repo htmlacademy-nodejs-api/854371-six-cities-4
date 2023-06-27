@@ -1,50 +1,46 @@
+import { StatusCodes } from 'http-status-codes';
+import HttpError from '../../core/errors/http-error.js';
+import { UserEntity } from '../user/user.entity.js';
 import { CommentServiceInterface } from './comment-service.interface.js';
 import { DocumentType, types } from '@typegoose/typegoose';
 import { CommentEntity } from './comment.entity.js';
 import CreateCommentDto from './dto/create-comment.dto.js';
-import { inject } from 'inversify';
+import { inject, injectable } from 'inversify';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
-import { UserEntity } from '../user/user.entity.js';
-import { RentalEntity } from '../rental/rental.entity.js';
 import { getLimit } from '../../common/offers.js';
 import { MAX_RETURNED_COMMENTS } from '../../common/const.js';
 
+@injectable()
 export default class CommentService implements CommentServiceInterface {
   constructor(
     @inject(APPLICATION_DEPENDENCIES.LoggerInterface) private logger: LoggerInterface,
     @inject(APPLICATION_DEPENDENCIES.CommentModel) private commentModel: types.ModelType<CommentEntity>,
     @inject(APPLICATION_DEPENDENCIES.UserModel) private userModel: types.ModelType<UserEntity>,
-    @inject(APPLICATION_DEPENDENCIES.RentalModel) private rentalModel: types.ModelType<RentalEntity>
-  ) {}
+  ) {
+  }
 
   private async checkUserExist(userId: string): Promise<boolean> {
     const user = await this.userModel.findById(userId);
     return !!user;
   }
 
-  private async checkOfferExist(offerId: string): Promise<boolean> {
-    const offer = await this.rentalModel.findById(offerId);
-    return !!offer;
-  }
-
-  public async createComment(dto: CreateCommentDto) {
+  public async createComment(dto: Omit<CreateCommentDto, 'offerId'>, offerId: string) {
     const isUserExist = await this.checkUserExist(dto.userId);
-    const isOfferExist = await this.checkOfferExist(dto.offerId);
 
     if (!isUserExist) {
-      this.logger.error(`createComment: user with ID ${dto.userId} not found`);
-      return null;
+      throw new HttpError(StatusCodes.NOT_FOUND, `createComment: user with ID ${dto.userId} not found`, 'createComment');
     }
 
-    if (!isOfferExist) {
-      this.logger.error(`createComment: offer with ID ${dto.offerId} not found`);
-      return null;
-    }
+    const updatedDto: CreateCommentDto = {
+      ...dto,
+      offerId
+    };
+    const result = await this.commentModel.create(updatedDto);
+    this.logger.info(`createComment: Created a comment for the user with ID ${dto.userId} and the rental listing with ID ${offerId}`);
 
-    const result = await this.commentModel.create(dto);
-    this.logger.info(`createComment: Created a comment for the user with ID ${dto.userId} and the rental listing with ID ${dto.offerId}`);
-    return result;
+    const resultToResponse = await this.commentModel.findById(result.id).populate(['userId']);
+    return resultToResponse;
   }
 
   public async findCommentsByOfferId(offerId: string, limit?: number): Promise<DocumentType<CommentEntity>[] | null> {

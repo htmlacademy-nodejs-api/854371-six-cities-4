@@ -1,4 +1,5 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
+import UserRdo from '../../user/rdo/user.rdo.js';
 
 export default class RentalAllRdo {
   @Expose()
@@ -43,8 +44,9 @@ export default class RentalAllRdo {
   @Expose()
   public amenities!: string[];
 
-  @Expose()
-  public userId!: string;
+  @Expose({name: 'userId'})
+  @Type(() => UserRdo)
+  public user!: UserRdo;
 
   @Expose()
   public numberComments!: number;

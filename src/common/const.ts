@@ -54,6 +54,11 @@ export const RatingLimit = {
   MAX: 5
 };
 
+export const Field = {
+  INCLUDE: 1,
+  EXCLUDE: 0
+};
+
 export const MIN_RANDOM_VALUE = 0;
 export const MAX_RANDOM_VALUE_FOR_BOOL = 1;
 export const MIN_PRICE_PER_NIGHT = 1;
@@ -70,3 +75,5 @@ export const SortType = {
 } as const;
 
 export const DEFAULT_OBJECT_TO_RESPONSE = {};
+
+export const DECIMAL_PLACES_COUNT = 2;

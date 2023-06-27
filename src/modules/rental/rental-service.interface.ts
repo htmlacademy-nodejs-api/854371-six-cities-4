@@ -60,10 +60,4 @@ export interface RentalServiceInterface extends DocumentExistsInterface {
    * @param offerId id объявления
    */
   findByIdAndDelete(offerId: string): Promise<DocumentType<RentalEntity> | null>
-
-  /**
-   * Увеличивает значение поля commentsNumber на 1 у записи с offerId
-   * @param offerId
-   */
-  incCommentCount(offerId: string): Promise<DocumentType<RentalEntity> | null>
 }
