@@ -1,5 +1,6 @@
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import { inject, injectable } from 'inversify';
+import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { HttpMethod } from '../../types/http-method.js';
@@ -24,7 +25,12 @@ export default class RentalController extends ControllerAbstract {
     this.logger.info('Route registration for listings');
 
     this.addRoute({path: '/', method: HttpMethod.Get, next: this.index});
-    this.addRoute({path: '/', method: HttpMethod.Post, next: this.create});
+    this.addRoute({
+      path: '/',
+      method: HttpMethod.Post,
+      next: this.create,
+      middlewares: [new ValidateDtoMiddleware(CreateRentalDto)]
+    });
     this.addRoute({
       path: '/:offerId',
       method: HttpMethod.Get,

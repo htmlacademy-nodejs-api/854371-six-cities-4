@@ -5,6 +5,7 @@ import { fillDto } from '../../common/utils.js';
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import DocumentExistMiddleware from '../../core/middlewares/document-exist.middleware.js';
+import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { ValidateObjectIdMiddleware } from '../../core/middlewares/validate-objectId.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { HttpMethod } from '../../types/http-method.js';
@@ -26,7 +27,10 @@ export default class CommentController extends ControllerAbstract {
       path: '/:offerId',
       method: HttpMethod.Get,
       next: this.index,
-      middlewares: [new ValidateObjectIdMiddleware('offerId')]
+      middlewares: [
+        new ValidateObjectIdMiddleware('offerId'),
+        new DocumentExistMiddleware(this.rentalService, 'rental', 'offerId')
+      ]
     });
 
     this.addRoute({
@@ -35,7 +39,8 @@ export default class CommentController extends ControllerAbstract {
       next: this.create,
       middlewares: [
         new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistMiddleware(this.rentalService, 'users', 'offerId')
+        new ValidateDtoMiddleware(CreateCommentDto),
+        new DocumentExistMiddleware(this.rentalService, 'rental', 'offerId')
       ]
     });
   }

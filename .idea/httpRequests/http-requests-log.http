@@ -1,5 +1,31 @@
 POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
 Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "Ef",
+  "rating": 10,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T194820.400.json
+
+###
+
+GET http://localhost:3000/comments/123456781234567812345
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-28T194750.400.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
 Content-Length: 101
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
@@ -673,26 +699,6 @@ User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
 Accept-Encoding: br,deflate,gzip,x-gzip
 
 <> 2023-06-20T012737.404.json
-
-###
-
-POST http://localhost:3000/city-favorite-offers/648f6751572d72678f99d38e
-Content-Length: 0
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-06-20T012708.404.json
-
-###
-
-POST http://localhost:3000/city-favorite-offers/648f6751572d72678f99d38e
-Content-Length: 0
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-06-20T012304.404.json
 
 ###
 

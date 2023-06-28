@@ -1,5 +1,6 @@
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import { inject, injectable } from 'inversify';
+import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { UserServiceInterface } from './user-service.interface.js';
@@ -21,7 +22,12 @@ export default class UserController extends ControllerAbstract {
   ) {
     super(logger);
 
-    this.addRoute({path: '/', method: HttpMethod.Post, next: this.create});
+    this.addRoute({
+      path: '/',
+      method: HttpMethod.Post,
+      next: this.create,
+      middlewares: [new ValidateDtoMiddleware(CreateUserDto)]
+    });
   }
 
   public async create({body}: Request<Record<string, unknown>, Record<string, unknown>, CreateUserDto>, res: Response) {
