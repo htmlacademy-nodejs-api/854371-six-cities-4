@@ -1,8 +1,8 @@
 import { defaultClasses, getModelForClass, modelOptions, post, prop, Ref } from '@typegoose/typegoose';
+import { DECIMAL_PLACES_COUNT, Field } from '../../common/const.js';
 import { Comment } from '../../types/comment.js';
 import { UserEntity } from '../user/user.entity.js';
 import { RentalEntity } from '../rental/rental.entity.js';
-import { DECIMAL_PLACES_COUNT, Field } from '../../common/const.js';
 
 export interface CommentEntity extends defaultClasses.Base {}
 
@@ -17,7 +17,7 @@ export interface CommentEntity extends defaultClasses.Base {}
 
   const rental = await RentalModel.findById(this.offerId);
   if (rental) {
-    rental.numberComments++;
+    rental.commentsNumber++;
 
     const comments = await CommentModel.find({offerId: this.offerId}, {rating: Field.INCLUDE});
     const ratings = comments.map((comment) => comment.rating);

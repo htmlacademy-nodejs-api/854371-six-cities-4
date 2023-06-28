@@ -1,0 +1,12 @@
+GET http://localhost:3000/comments/123456781234567812345
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+
+{
+  "text": "{{$random.alphabetic(2)}}",
+  "rating": 10,
+  "userId": "6496f086af55cc3ef668d58c"
+}

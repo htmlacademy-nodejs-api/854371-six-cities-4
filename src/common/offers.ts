@@ -2,41 +2,32 @@ import { RentalOffer } from '../types/rental-offer.js';
 
 export function createOffer(offerData: string): RentalOffer {
   const [
-    title,
-    description,
-    publishDate,
-    city,
-    previewImage,
-    mainImages,
-    isPremium,
-    isFavorite,
-    rating,
-    type,
-    roomsCounter,
-    guestsCounter,
-    cost,
-    amenities,
-    numberComments,
-    coordinates
+    title, description, city, previewImage, mainImages, isPremium, isFavorite,
+    housingType, roomsCounter, guestsCounter, rentalCost, amenities, coordinates,
+    username, email, userType,
   ] = offerData.replace('\n', '').split('\t');
 
   const coordinatesArray = coordinates.split(';').map((coordinate) => parseFloat(coordinate));
   return {
     title,
     description,
-    publishDate: new Date(publishDate),
     city: city,
     previewImage,
     mainImages: mainImages.split(';'),
     isPremium: isPremium === 'true',
     isFavorite: isFavorite === 'true',
-    rating: parseFloat(rating),
-    type: type,
+    rating: 0,
+    housingType: housingType,
     roomsCounter: parseInt(roomsCounter, 10),
     guestsCounter: parseInt(guestsCounter, 10),
-    cost: parseInt(cost, 10),
+    rentalCost: parseInt(rentalCost, 10),
     amenities: amenities.split(';'),
-    numberComments: parseInt(numberComments, 10),
+    user: {
+      name: username,
+      email: email,
+      userType,
+    },
+    commentsNumber: 0,
     coordinates: {
       latitude: coordinatesArray[0],
       longitude: coordinatesArray[1]
@@ -52,7 +43,5 @@ export function getLimit(maxLimit: number, limit?: number): number {
 }
 
 export function transformCityWord(city: string): string {
-  const cityLetters = city.trim().split('');
-  cityLetters[0].toUpperCase();
-  return cityLetters.join('');
+  return `${city[0].toUpperCase()}${city.substring(1)}`;
 }

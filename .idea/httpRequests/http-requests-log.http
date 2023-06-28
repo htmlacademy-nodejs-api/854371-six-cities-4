@@ -1,0 +1,704 @@
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 74
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "Ef",
+  "rating": 10,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T194820.400.json
+
+###
+
+GET http://localhost:3000/comments/123456781234567812345
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-28T194750.400.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "ElaVaaepnhlPJINqaeubsUUHamUXiP",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T013509.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "LKSXtqTsryRSfychlzNAcVrFKaTsEa",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T012009.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "vvRAizGevpSqFlCFoXBimBjvZZzHGa",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T010708.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "fsnXhCKunYjqsxPbItITUCLvWwsLyf",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T010551.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "joesoYAEMKiqTCsUzfdDjKiuQVxcPK",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T010530.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "UwyniaZIVeoTYOelXTuqQmsqIKOqQD",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T010501.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "hEpljJBaaVyiWnpeDDdGyHQNJDVBxB",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T010255.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "CpVhiwJVxRHOOzCTnWDpJqjRrQABOw",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005618.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "tNFAXBuTJTlCCgWEppDrDuNcSyEKNQ",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005157.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "NEOLHhZXXaLIkZXRscHpwCPgdrvnav",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005156.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "LmXTYjYwZRBbcAQmveubIaEfJEHwFd",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005155.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "CxQLdUvJKKkKIXTKYgWdKhlJcBgSvC",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005154.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "VKGdKEnFClwtMzPsGcTFsOEtAFkyLZ",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005152.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "zvrxjoiueoSZUYVbBchbAFsyirwdWT",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005150.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "XHFqcnLUILeKOidsFRklGCaeqExyCC",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005149.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "RMUmaNuISkhdUWYyzLMEYJLeUDzKfH",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005148.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "USKZnqsLsvbZaDazVZTtqNdUfhzCOo",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005147.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "EsAdjdXfUXZnXQSGYheCcthcEdbYUi",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T005143.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "IspxmMyUIpMNKPxNZTjEdxqApNYwNn",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T003259.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "evAsrIgNYWdGckgFnbJCZmBOmlurDl",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T003149.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "guHlPMsKxZMdhisvXtUFRBYJFDRQrM",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T002847.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bd26
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "jOXktKdmkNBhQiFLzTjsjMrOVWHTNd",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T002836.404.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "YOKphuMUoejWGLnvzqhGcCzKRtXgPV",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-28T002624.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "DfLSSrfPTSbWUSPnkULnIwtOLXEFmb",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-27T170747.200.json
+
+###
+
+POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+Content-Type: application/json
+Content-Length: 101
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "text": "VcZLXuOVaUeOJyNDwuFBXSTXQhFphq",
+  "rating": 5,
+  "userId": "6496f086af55cc3ef668d58c"
+}
+
+<> 2023-06-27T170307.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-27T151845.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/649a157a948877d3dfb0bdd2
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-27T124906.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-27T124852.200.json
+
+###
+
+GET http://localhost:3000/comments/123456781234567812345
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-27T122916.400.json
+
+###
+
+GET http://localhost:3000/comments/123456781234567812345678
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-27T122855.200.json
+
+###
+
+GET http://localhost:3636/api
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-26T233434.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-24T151013.200.json
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-24T150908.404.json
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-23T175143.404.json
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-23T175112.400.json
+
+###
+
+GET http://localhost:3000/rental-offers/648f6751572d72678f99d384
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-23T175100.404.json
+
+###
+
+GET http://localhost:3000/rental-offers/
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-23T175051.200.json
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "Harry",
+  "password": "avada-kedavra",
+  "email": "harry.potter@hogwarts.edu",
+  "avatarUrl": "localhost:62489/http-client/examples/harry.png",
+  "userType": "pro"
+}
+
+<> 2023-06-21T003840.409.json
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "Harry",
+  "password": "avada-kedavra",
+  "email": "harry.potter@hogwarts.edu",
+  "avatarUrl": "localhost:62489/http-client/examples/harry.png",
+  "userType": "pro"
+}
+
+<> 2023-06-21T001542.500.json
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "Harry",
+  "password": "avada-kedavra",
+  "email": "harry.potter@hogwarts.edu",
+  "avatarUrl": "localhost:62489/http-client/examples/harry.png",
+  "userType": "pro"
+}
+
+<> 2023-06-21T000332.409.json
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+Content-Length: 178
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "name": "Harry",
+  "password": "avada-kedavra",
+  "email": "harry.potter@hogwarts.edu",
+  "avatarUrl": "localhost:62489/http-client/examples/harry.png",
+  "userType": "pro"
+}
+
+<> 2023-06-21T000320.201.json
+
+###
+
+POST http://localhost:3000/city-favorite-offers/648f6752572d72678f99d722
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T225822.200.json
+
+###
+
+POST http://localhost:3000/city-favorite-offers/648f6752572d72678f99d722
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T225820.200.json
+
+###
+
+POST http://localhost:3000/city-favorite-offers/648f6752572d72678f99d722
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T225817.200.json
+
+###
+
+POST http://localhost:3000/city-favorite-offers/648f6752572d72678f99d722
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T225811.200.json
+
+###
+
+GET http://localhost:3000/city-favorite-offers
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T225802.200.json
+
+###
+
+POST http://localhost:3000/city-favorite-offers/648f6751572d72678f99d38e
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T225741.404.json
+
+###
+
+POST http://localhost:3000/city-favorite-offers/648f6751572d72678f99d38e
+Content-Length: 0
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-06-20T012737.404.json
+
+###
+

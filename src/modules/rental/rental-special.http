@@ -1,0 +1,9 @@
+GET http://localhost:3000/city-favorite-offers
+
+###
+
+GET http://localhost:3000/city-favorite-offers/Paris
+
+###
+
+POST http://localhost:3000/city-favorite-offers/648f6752572d72678f99d722

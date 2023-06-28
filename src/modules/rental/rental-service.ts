@@ -14,27 +14,31 @@ export default class RentalService implements RentalServiceInterface {
   constructor(
     @inject(APPLICATION_DEPENDENCIES.LoggerInterface) private logger: LoggerInterface,
     @inject(APPLICATION_DEPENDENCIES.RentalModel) private rentalModel: types.ModelType<RentalEntity>
-  ) {}
+  ) {
+  }
 
-  create(dto: CreateRentalDto): Promise<DocumentType<RentalEntity>> {
-    const result = this.rentalModel.create(dto);
-    this.logger.info(`Rental offer created: ${dto.title}`);
+  async create(dto: CreateRentalDto): Promise<DocumentType<RentalEntity>> {
+    const result = await this.rentalModel.create(dto);
+    this.logger.info(`Rental offer created: ${result.title}`);
 
     return result;
   }
 
   async find(limit?: number): Promise<DocumentType<RentalEntity>[]> {
-    const result = await this.rentalModel.find({}, null, {limit: getLimit(MAX_RETURNED_OFFERS, limit)})
-      .populate(['userId'])
-      .exec();
-    this.logger.info(`find: Returned (${result.length}) of offers`);
+    const result = await this.rentalModel.aggregate([
+      {$addFields: {id: {$toString: '$_id'}}},
+      {$sort: {createdAt: SortType.DEC}},
+      {$limit: getLimit(MAX_RETURNED_OFFERS, limit)},
+    ]).exec();
+    this.logger.info(`find: Returned (${getLimit(MAX_RETURNED_OFFERS, limit)}) of offers`);
     return result;
   }
 
   async findById(offerId: string): Promise<DocumentType<RentalEntity> | null> {
-    const result = await this.rentalModel.findById({offerId})
+    const result = await this.rentalModel.findById(offerId)
       .populate(['userId'])
       .exec();
+
     if (result) {
       this.logger.info(`findById: Returned the offer with ID ${offerId}`);
     } else {
@@ -45,7 +49,13 @@ export default class RentalService implements RentalServiceInterface {
 
   async findByCityAndPremium(city: string, limit?: number): Promise<DocumentType<RentalEntity>[] | null> {
     const transformedCityWord = transformCityWord(city);
-    const result = await this.rentalModel.find({city: transformedCityWord, isPremium: true}, null, {limit: getLimit(MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY, limit)});
+    const result = await this.rentalModel.find({
+      city: transformedCityWord,
+      isPremium: true
+    }, null, {limit: getLimit(MAX_RETURNED_PREMIUM_OFFERS_FOR_CITY, limit)})
+      .sort({createdAt: SortType.DEC})
+      .exec();
+
     if (result) {
       this.logger.info(`findByCityAndPremium: Found ${result.length} premium offers for city ${transformedCityWord}`);
     } else {
@@ -56,7 +66,7 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async findByIdAndUpdate(offerId: string, dto: UpdateRentalDto): Promise<DocumentType<RentalEntity> | null> {
-    const result = await this.rentalModel.findOneAndUpdate({offerId}, dto, {new: true})
+    const result = await this.rentalModel.findByIdAndUpdate(offerId, dto, {new: true})
       .populate('userId')
       .sort({createdAt: SortType.DEC})
       .exec();
@@ -95,6 +105,7 @@ export default class RentalService implements RentalServiceInterface {
   }
 
   async changeFavoriteFlag(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+
     const rentalOffer = await this.findById(offerId);
 
     if (!rentalOffer) {
@@ -102,22 +113,29 @@ export default class RentalService implements RentalServiceInterface {
       return null;
     }
 
-    const changedRentalOffer = await this.rentalModel.findOneAndUpdate({offerId}, {isFavorite: !rentalOffer.isFavorite}, {new: true})
+    const changedRentalOffer = await this.rentalModel.findByIdAndUpdate(offerId, {isFavorite: !rentalOffer.isFavorite}, {new: true})
       .populate(['userId'])
       .exec();
 
-    this.logger.info('');
+    this.logger.info(`changeFavoriteFlag: The offer with ID ${offerId} has been updated`);
 
     return changedRentalOffer;
   }
 
-  async deleteRental(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+  async findByIdAndDelete(offerId: string): Promise<DocumentType<RentalEntity> | null> {
+
     const result = await this.rentalModel.findByIdAndDelete(offerId);
+
     if (result) {
       this.logger.info(`delete: The offer with ID ${offerId} has been deleted`);
     } else {
       this.logger.info(`delete: The offer with ID ${offerId} was not found`);
     }
+
     return result;
+  }
+
+  async exist(offerId: string): Promise<boolean> {
+    return (await this.rentalModel.exists({_id: offerId})) !== null;
   }
 }

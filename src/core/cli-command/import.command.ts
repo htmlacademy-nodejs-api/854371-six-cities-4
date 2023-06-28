@@ -12,11 +12,12 @@ import RentalService from '../../modules/rental/rental-service.js';
 import { RentalModel } from '../../modules/rental/rental.entity.js';
 import MongoClientService from '../databese-client/mongo-client.service.js';
 import { RentalOffer } from '../../types/rental-offer.js';
-import { createUser } from '../../common/user.js';
 import { getUri } from '../../common/db.js';
 import { ConfigInterface } from '../config/config.interface.js';
 import { RestSchema } from '../config/rest.schema.js';
 import ConfigService from '../config/config.service.js';
+
+const DEFAULT_USER_PASSWORD = '123456';
 
 export default class ImportCommand {
   public readonly name = '--import';
@@ -37,16 +38,14 @@ export default class ImportCommand {
     this.configService = new ConfigService(this.logger);
   }
 
-  private async findOrCreateUser() {
-    const createdUser = createUser();
-    return await this.userService.findOrCreate(createdUser, this.salt);
-  }
-
   private async saveRentalOffer(rentalOffer: RentalOffer) {
-    const createdUser = await this.findOrCreateUser();
+    const user = await this.userService.findOrCreate({
+      ...rentalOffer.user,
+      password: DEFAULT_USER_PASSWORD,
+    }, this.salt);
     await this.rentalService.create({
       ...rentalOffer,
-      userId: createdUser.id
+      userId: user.id,
     });
   }
 

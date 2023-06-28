@@ -1,6 +1,5 @@
 import { User } from '../../types/user.js';
 import typegoose, { defaultClasses, getModelForClass, modelOptions } from '@typegoose/typegoose';
-import { REGULAR_EXPRESSION } from '../../common/const.js';
 import { createSha256 } from '../../common/utils.js';
 import { injectable } from 'inversify';
 
@@ -29,8 +28,8 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({required: true, default: ''})
   private password?: string = '';
 
-  @prop({match: REGULAR_EXPRESSION.CheckPhotoPath, default: 'https://api.dicebear.com/6.x/bottts/jpg'})
-  public avatarUrl: string;
+  @prop({default: 'https://api.dicebear.com/6.x/bottts/jpg'})
+  public avatarUrl?: string;
 
   @prop({enum: UserType, required: true})
   public userType: 'base' | 'pro';

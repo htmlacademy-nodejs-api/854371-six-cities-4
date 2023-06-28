@@ -346,19 +346,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/RentalOffer'
+
+  /city-favorite-offers/{offerId}/:
     post:
       tags:
         - city-favorite-offers
       summary: Добавление предложения в избранное
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                offerId:
-                  type: string
+      parameters:
+        - name: offerId
+          in: path
+          required: true
+          description: ID предложения
+          schema:
+            type: string
       responses:
         '201':
           description: Предложение успешно добавлено в избранное
@@ -368,13 +368,13 @@ paths:
       summary: Удаление предложения из избранного
       requestBody:
         required: true
-        content:
-          application/json:
+        parameters:
+          - name: offerId
+            in: path
+            required: true
+            description: ID предложения
             schema:
-              type: object
-              properties:
-                offerId:
-                  type: string
+              type: string
       responses:
         '200':
           description: Предложение успешно удалено из избранного
@@ -466,24 +466,25 @@ components:
     RentalOffer:
       type: object
       required:
-        - name
+        - title
         - description
         - publicationDate
         - city
         - previewImage
-        - images
+        - mainImages
         - isPremium
         - isFavourite
         - rating
         - housingType
-        - rooms
-        - guests
+        - roomsCounter
+        - guestsCounter
         - rentalCost
         - amenities
-        - offerAuthor
-        - location
+        - userId
+        - commentsNumber
+        - coordinates
       properties:
-        name:
+        title:
           type: string
           minLength: 10
           maxLength: 100
