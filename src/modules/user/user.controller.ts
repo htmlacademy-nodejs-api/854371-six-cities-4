@@ -1,17 +1,18 @@
-import ControllerAbstract from '../../core/controller/controller-abstract.js';
+import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import { inject, injectable } from 'inversify';
+import { fillDto } from '../../common/utils.js';
+import ConfigService from '../../core/config/config.service.js';
+import ControllerAbstract from '../../core/controller/controller-abstract.js';
+import HttpError from '../../core/errors/http-error.js';
+import { LoggerInterface } from '../../core/logger/logger.interface.js';
+import UploadFileMiddleware from '../../core/middlewares/upload-file.middleware.js';
 import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
-import { LoggerInterface } from '../../core/logger/logger.interface.js';
-import { UserServiceInterface } from './user-service.interface.js';
 import { HttpMethod } from '../../types/http-method.js';
-import { Request, Response } from 'express';
 import CreateUserDto from './dto/create-user.dto.js';
-import ConfigService from '../../core/config/config.service.js';
-import { StatusCodes } from 'http-status-codes';
-import { fillDto } from '../../common/utils.js';
 import UserRdo from './rdo/user.rdo.js';
-import HttpError from '../../core/errors/http-error.js';
+import { UserServiceInterface } from './user-service.interface.js';
 
 @injectable()
 export default class UserController extends ControllerAbstract {
@@ -28,6 +29,12 @@ export default class UserController extends ControllerAbstract {
       next: this.create,
       middlewares: [new ValidateDtoMiddleware(CreateUserDto)]
     });
+    this.addRoute({
+      path: '/:userId/avatar',
+      method: HttpMethod.Post,
+      next: this.uploadAvatar,
+      middlewares: [new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'avatar')]
+    });
   }
 
   public async create({body}: Request<Record<string, unknown>, Record<string, unknown>, CreateUserDto>, res: Response) {
@@ -42,5 +49,11 @@ export default class UserController extends ControllerAbstract {
     const createdUserToResponse = fillDto(UserRdo, result);
 
     this.created(res, createdUserToResponse);
+  }
+
+  public async uploadAvatar(req: Request, res: Response) {
+    this.created(res, {
+      filepath: req.file?.path
+    });
   }
 }

@@ -1,9 +1,10 @@
+import { DocumentExistsInterface } from '../../types/document-exists.interface.js';
 import CreateUserDto from './dto/create-user.dto.js';
 import { DocumentType } from '@typegoose/typegoose';
 import { UserEntity } from './user.entity.js';
 import UpdateUserDto from './dto/update-user.dto.js';
 
-export interface UserServiceInterface {
+export interface UserServiceInterface extends DocumentExistsInterface{
   /**
    * Создать нового пользователя с данными `dto`
    * @param dto объект с данными пользователя
