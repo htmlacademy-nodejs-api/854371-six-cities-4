@@ -41,7 +41,7 @@ export default class RestApplication {
 
     this.expressApplication.listen(port);
 
-    this.logger.info(`🚀Server started on http://localhost:${port}/`);
+    this.logger.info(`Server started on http://localhost:${port}/`);
   }
 
   private async _initRouters() {
@@ -54,8 +54,14 @@ export default class RestApplication {
   }
 
   private async _initMiddleware() {
+    const uploadDirectory = this.config.get('UPLOAD_DIRECTORY');
+
     this.logger.info('Global middleware initialization…');
     this.expressApplication.use(express.json());
+    this.expressApplication.use(
+      './upload',
+      express.static(uploadDirectory)
+    );
     this.logger.info('Global middleware initialization completed');
   }
 

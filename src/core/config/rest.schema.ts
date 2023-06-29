@@ -12,6 +12,7 @@ export type RestSchema = {
   DB_PASSWORD: string;
   DB_PORT: number;
   DB_NAME: string;
+  UPLOAD_DIRECTORY: string;
 }
 
 export const configurationSchema = convict<RestSchema>({
@@ -55,6 +56,12 @@ export const configurationSchema = convict<RestSchema>({
     doc: 'The secret',
     format: 'String',
     env: 'SALT',
+    default: null
+  },
+  UPLOAD_DIRECTORY: {
+    doc: 'The secret',
+    format: 'String',
+    env: 'UPLOAD_DIRECTORY',
     default: null
   }
 });
