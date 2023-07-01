@@ -28,9 +28,9 @@ export default class RentalService implements RentalServiceInterface {
     const result = await this.rentalModel.aggregate([
       {$addFields: {id: {$toString: '$_id'}}},
       {$sort: {createdAt: SortType.DEC}},
-      {$limit: getLimit(MAX_RETURNED_OFFERS, limit)},
+      {$limit: limit ? limit : MAX_RETURNED_OFFERS},
     ]).exec();
-    this.logger.info(`find: Returned (${getLimit(MAX_RETURNED_OFFERS, limit)}) of offers`);
+    this.logger.info(`find: Returned (${limit ? limit : MAX_RETURNED_OFFERS}) of offers`);
     return result;
   }
 

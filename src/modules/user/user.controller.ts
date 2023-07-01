@@ -36,7 +36,7 @@ export default class UserController extends ControllerAbstract {
       middlewares: [new ValidateDtoMiddleware(CreateUserDto)]
     });
     this.addRoute({
-      path: '/:userId/avatar',
+      path: '/avatar',
       method: HttpMethod.Post,
       next: this.uploadAvatar,
       middlewares: [new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'avatar')]

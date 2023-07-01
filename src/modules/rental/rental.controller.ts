@@ -1,3 +1,4 @@
+import { MAX_RETURNED_OFFERS } from '../../common/const.js';
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import { inject, injectable } from 'inversify';
 import CheckOwnershipMiddleware from '../../core/middlewares/check-ownership.middleware.js';
@@ -7,7 +8,6 @@ import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { HttpMethod } from '../../types/http-method.js';
 import { Request, Response } from 'express';
 import RentalService from './rental-service.js';
-import { MAX_RETURNED_OFFERS } from '../../common/const.js';
 import { fillDto } from '../../common/utils.js';
 import RentalShortRdo from './rdo/rental-short.rdo.js';
 import RentalAllRdo from './rdo/rental-all.rdo.js';
@@ -63,8 +63,16 @@ export default class RentalController extends ControllerAbstract {
     });
   }
 
-  public async index(_req: Request, res: Response): Promise<void> {
-    const rentalOffers = await this.rentalService.find(MAX_RETURNED_OFFERS);
+  public async index({query, user}: Request, res: Response): Promise<void> {
+    const limit = query.limit ? query.limit : MAX_RETURNED_OFFERS;
+    const rentalOffers = await this.rentalService.find(+limit);
+
+    if (!user) {
+      for (const rentalOffer of rentalOffers) {
+        rentalOffer.isFavorite = false;
+      }
+    }
+
     const rentalOffersToResponse = fillDto(RentalShortRdo, rentalOffers);
     this.ok(res, rentalOffersToResponse);
   }

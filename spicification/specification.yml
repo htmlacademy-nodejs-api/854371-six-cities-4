@@ -55,19 +55,12 @@ paths:
         '409':
           description: Пользователь с таким email уже существует.
 
-  /users/{userId}/avatar:
+  /users/avatar:
     post:
       tags:
         - users
       summary: Загрузка аватара пользователя
-      description: Ресурс для загрузки аватара пользователя. Принимается только аватар в расширении png или jpg.
-      parameters:
-        - in: path
-          name: userId
-          required: true
-          schema:
-            type: string
-          description: Уникальный идентификатор пользователя
+      description: Ресурс для загрузки аватара пользователя. Принимается только аватар в расширении png или jpg
       requestBody:
         content:
           multipart/form-data:
@@ -148,20 +141,6 @@ paths:
         '401':
           description: Неверный логин или пароль.
 
-  /users/logout:
-    delete:
-      tags:
-        - users
-      summary: Выход из закрытой части приложения
-      description: Ресурс для завершения пользовательского сеанса.
-      security:
-        - bearerAuth: []
-      responses:
-        '204':
-          description: Сеанс успешно завершен.
-        '401':
-          description: Не авторизован или токен недействителен.
-
   /users/check:
     get:
       tags:
@@ -180,7 +159,7 @@ paths:
         '401':
           description: Клиент не авторизован или токен недействителен.
 
-  /rental-offers:
+  /rental-offers?limit={number}:
     get:
       tags:
         - rental-offers
@@ -203,13 +182,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/RentalOffer'
+  /rental-offers:
     post:
       tags:
         - rental-offers
       summary: Создание нового предложения
       description: Ресурс для создания новых предложений.
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
