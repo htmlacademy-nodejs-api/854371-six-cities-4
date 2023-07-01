@@ -2,6 +2,7 @@ import { MAX_RETURNED_OFFERS } from '../../common/const.js';
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import { inject, injectable } from 'inversify';
 import CheckOwnershipMiddleware from '../../core/middlewares/check-ownership.middleware.js';
+import PrivateRouteMiddleware from '../../core/middlewares/private-route.middleware.js';
 import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
@@ -30,7 +31,10 @@ export default class RentalController extends ControllerAbstract {
       path: '/',
       method: HttpMethod.Post,
       next: this.create,
-      middlewares: [new ValidateDtoMiddleware(CreateRentalDto)]
+      middlewares: [
+        new PrivateRouteMiddleware(),
+        new ValidateDtoMiddleware(CreateRentalDto)
+      ]
     });
     this.addRoute({
       path: '/:offerId',
@@ -46,6 +50,7 @@ export default class RentalController extends ControllerAbstract {
       method: HttpMethod.Patch,
       next: this.edit,
       middlewares: [
+        new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
         new DocumentExistMiddleware(rentalService, 'Rental', 'offerId'),
         new CheckOwnershipMiddleware(rentalService, 'offerId')
@@ -56,6 +61,7 @@ export default class RentalController extends ControllerAbstract {
       method: HttpMethod.Delete,
       next: this.remove,
       middlewares: [
+        new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
         new DocumentExistMiddleware(rentalService, 'Rental', 'offerId'),
         new CheckOwnershipMiddleware(rentalService, 'offerId')
@@ -83,8 +89,13 @@ export default class RentalController extends ControllerAbstract {
     this.created(res, fillDto(RentalAllRdo, result));
   }
 
-  public async getInfo({params}: Request, res: Response): Promise<void> {
+  public async getInfo({params, user}: Request, res: Response): Promise<void> {
     const rental = await this.rentalService.findById(params.offerId);
+
+    if (!user && rental) {
+      rental.isFavorite = false;
+    }
+
     const rentalToResponse = fillDto(RentalAllRdo, rental);
     this.ok(res, rentalToResponse);
   }

@@ -41,6 +41,7 @@ export default class RestApplication {
     const port = this.config.get('APP_PORT');
 
     this.expressApplication.listen(port);
+    this.expressApplication.disable('x-powered-by');
 
     this.logger.info(`Server started on http://localhost:${port}/`);
   }

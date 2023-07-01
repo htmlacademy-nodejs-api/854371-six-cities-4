@@ -1,3 +1,166 @@
+POST http://localhost:3000/rental-offers/
+Content-Type: application/json
+Content-Length: 587
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "title": "faIMBSmxNRYApbT",
+  "description": "PsffAjwRHtGzdiZQezpiyaXkYHoePkFuZZCFxrCFpFwuz",
+  "city": "tboxyMsWyh",
+  "previewImage": "localhost:53110/http-client/examples",
+  "mainImages": ["localhost:53110/http-client/examples", "localhost:53110/http-client/examples"],
+  "isPremium": true,
+  "isFavorite": false,
+  "rating": 2.0791955,
+  "type": "JkslIzKB",
+  "roomsCounter": 8,
+  "guestsCounter": 5,
+  "cost": 5190,
+  "amenities": ["ki0Pd7PXcV", "XUrA6pGE2A", "7VV9j5R5hi"],
+  "numberComments": 684,
+  "coordinates": {
+    "latitude": 3.491043,
+    "longitude": 4.7217226
+  }
+}
+
+<> 2023-07-01T210302.401.json
+
+###
+
+POST http://localhost:3000/rental-offers/
+Content-Type: application/json
+Content-Length: 588
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "title": "TSPcTKenoGJxnxK",
+  "description": "jbPRhrjKZrhiXENiDwJSQhkzbqEgDCtKMEdwDCiNaDmyN",
+  "city": "ywwqKFFblI",
+  "previewImage": "localhost:53110/http-client/examples",
+  "mainImages": ["localhost:53110/http-client/examples", "localhost:53110/http-client/examples"],
+  "isPremium": true,
+  "isFavorite": false,
+  "rating": 3.9114056,
+  "type": "ghegVoAR",
+  "roomsCounter": 5,
+  "guestsCounter": 3,
+  "cost": 2227,
+  "amenities": ["cjiASiOydx", "Z1aCs6OqBD", "kMQaotRGl9"],
+  "numberComments": 404,
+  "coordinates": {
+    "latitude": 2.3069696,
+    "longitude": 3.3629239
+  }
+}
+
+<> 2023-07-01T210017.401.json
+
+###
+
+POST http://localhost:3000/rental-offers/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pY2hlbGxlQGdvb2dsZS5jb20iLCJpZCI6IjY0OTZmMDg2YWY1NWNjM2VmNjY4ZDVjMiIsImlhdCI6MTY4ODIxMjkwOSwiZXhwIjoxNjg4Mzg1NzA5fQ.gs9n4Pb0VLOrWV8UDffLdc9p3L8gCiHZBTUFrkjaCk4
+Content-Length: 587
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "title": "zloiHNuOlaiNYBZ",
+  "description": "ZvcbwQZZzgtXhCljZEFHNDNpxmxABunGyXAvtWysyHWKu",
+  "city": "ToLLRHISTx",
+  "previewImage": "localhost:53110/http-client/examples",
+  "mainImages": ["localhost:53110/http-client/examples", "localhost:53110/http-client/examples"],
+  "isPremium": true,
+  "isFavorite": false,
+  "rating": 2.0249796,
+  "type": "zOTztapn",
+  "roomsCounter": 9,
+  "guestsCounter": 6,
+  "cost": 4405,
+  "amenities": ["R9QPhlcIOr", "vKESp8HCPk", "KjXDCicQYW"],
+  "numberComments": 345,
+  "coordinates": {
+    "latitude": 1.1845523,
+    "longitude": 2.407742
+  }
+}
+
+<> 2023-07-01T205857.400.json
+
+###
+
+POST http://localhost:3000/rental-offers/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pY2hlbGxlQGdvb2dsZS5jb20iLCJpZCI6IjY0OTZmMDg2YWY1NWNjM2VmNjY4ZDVjMiIsImlhdCI6MTY4ODIxMjkwOSwiZXhwIjoxNjg4Mzg1NzA5fQ.gs9n4Pb0VLOrWV8UDffLdc9p3L8gCiHZBTUFrkjaCk4
+Content-Length: 587
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "title": "golRhdLjqiNkTyo",
+  "description": "uAxdOxKpuRLxlUHEbQzoBJmjJtfsiZbnylXnrPSuZHhFx",
+  "city": "gtaUxmnagY",
+  "previewImage": "localhost:53110/http-client/examples",
+  "mainImages": ["localhost:53110/http-client/examples", "localhost:53110/http-client/examples"],
+  "isPremium": true,
+  "isFavorite": false,
+  "rating": 4.2930593,
+  "type": "TAcutSpn",
+  "roomsCounter": 0,
+  "guestsCounter": 2,
+  "cost": 4157,
+  "amenities": ["ntzswFBSsl", "HO0t3UPpmG", "yg3XowWztN"],
+  "numberComments": 838,
+  "coordinates": {
+    "latitude": 4.811085,
+    "longitude": 3.1822488
+  }
+}
+
+<> 2023-07-01T205815.400.json
+
+###
+
+POST http://localhost:3000/rental-offers/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pY2hlbGxlQGdvb2dsZS5jb20iLCJpZCI6IjY0OTZmMDg2YWY1NWNjM2VmNjY4ZDVjMiIsImlhdCI6MTY4ODIxMjkwOSwiZXhwIjoxNjg4Mzg1NzA5fQ.gs9n4Pb0VLOrWV8UDffLdc9p3L8gCiHZBTUFrkjaCk4
+Content-Length: 588
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "title": "qYXfCeBYoCmCImN",
+  "description": "GSsAtRoXLlEqeafCWGvwOOHYmQlUEgsoEisKUWMINXGPu",
+  "city": "dGuEsYmiUm",
+  "previewImage": "localhost:53110/http-client/examples",
+  "mainImages": ["localhost:53110/http-client/examples", "localhost:53110/http-client/examples"],
+  "isPremium": true,
+  "isFavorite": false,
+  "rating": 2.1176922,
+  "type": "EpWHIoKB",
+  "roomsCounter": 1,
+  "guestsCounter": 9,
+  "cost": 6084,
+  "amenities": ["ulVohGeEt9", "9ZrC5Wx8t2", "ld0ohl00PA"],
+  "numberComments": 279,
+  "coordinates": {
+    "latitude": 4.2112083,
+    "longitude": 2.7106876
+  }
+}
+
+<> 2023-07-01T205807.400.json
+
+###
+
 GET http://localhost:3000/rental-offers
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
@@ -677,91 +840,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 }
 
 <> 2023-06-28T005149.200.json
-
-###
-
-POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
-Content-Type: application/json
-Content-Length: 101
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "text": "RMUmaNuISkhdUWYyzLMEYJLeUDzKfH",
-  "rating": 5,
-  "userId": "6496f086af55cc3ef668d58c"
-}
-
-<> 2023-06-28T005148.200.json
-
-###
-
-POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
-Content-Type: application/json
-Content-Length: 101
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "text": "USKZnqsLsvbZaDazVZTtqNdUfhzCOo",
-  "rating": 5,
-  "userId": "6496f086af55cc3ef668d58c"
-}
-
-<> 2023-06-28T005147.200.json
-
-###
-
-POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
-Content-Type: application/json
-Content-Length: 101
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "text": "EsAdjdXfUXZnXQSGYheCcthcEdbYUi",
-  "rating": 5,
-  "userId": "6496f086af55cc3ef668d58c"
-}
-
-<> 2023-06-28T005143.200.json
-
-###
-
-POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
-Content-Type: application/json
-Content-Length: 101
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "text": "IspxmMyUIpMNKPxNZTjEdxqApNYwNn",
-  "rating": 5,
-  "userId": "6496f086af55cc3ef668d58c"
-}
-
-<> 2023-06-28T003259.200.json
-
-###
-
-POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
-Content-Type: application/json
-Content-Length: 101
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "text": "evAsrIgNYWdGckgFnbJCZmBOmlurDl",
-  "rating": 5,
-  "userId": "6496f086af55cc3ef668d58c"
-}
-
-<> 2023-06-28T003149.200.json
 
 ###
 

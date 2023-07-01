@@ -12,7 +12,6 @@ GET http://localhost:3000/rental-offers/{{$random.alphanumeric(24)}}
 
 POST http://localhost:3000/rental-offers/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pY2hlbGxlQGdvb2dsZS5jb20iLCJpZCI6IjY0OTZmMDg2YWY1NWNjM2VmNjY4ZDVjMiIsImlhdCI6MTY4ODIxMjkwOSwiZXhwIjoxNjg4Mzg1NzA5fQ.gs9n4Pb0VLOrWV8UDffLdc9p3L8gCiHZBTUFrkjaCk4
 
 {
   "title": "{{$random.alphabetic(15)}}",
