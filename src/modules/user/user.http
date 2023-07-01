@@ -18,3 +18,7 @@ Content-Type: application/json
   "email": "michelle@google.com",
   "password": "pass123456"
 }
+
+###
+
+GET http://localhost:3000/users/check

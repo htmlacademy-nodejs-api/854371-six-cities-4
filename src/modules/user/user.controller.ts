@@ -8,6 +8,7 @@ import ConfigService from '../../core/config/config.service.js';
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import HttpError from '../../core/errors/http-error.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
+import PrivateRouteMiddleware from '../../core/middlewares/private-route.middleware.js';
 import UploadFileMiddleware from '../../core/middlewares/upload-file.middleware.js';
 import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
@@ -45,6 +46,12 @@ export default class UserController extends ControllerAbstract {
       path: '/login',
       method: HttpMethod.Post,
       next: this.login
+    });
+    this.addRoute({
+      path: '/check',
+      method: HttpMethod.Get,
+      next: this.check,
+      middlewares: [new PrivateRouteMiddleware]
     });
   }
 
@@ -96,5 +103,9 @@ export default class UserController extends ControllerAbstract {
     );
 
     this.ok(res, fillDto(LoggedUserRdo, {email: user.email, token: token}));
+  }
+
+  public async check({user}: Request, res: Response) {
+    this.ok(res, {email: user.email});
   }
 }
