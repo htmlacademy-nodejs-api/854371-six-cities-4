@@ -1,4 +1,4 @@
-import { IsMongoId, IsNumber, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
+import { IsNumber, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
 
 export default class CreateCommentDto {
   @IsString({ message: 'Text must be a string' })
@@ -11,10 +11,8 @@ export default class CreateCommentDto {
   @Max(5, { message: 'Rating cannot exceed 5' })
   public rating!: number;
 
-  @IsMongoId({ message: 'UserId must be a valid Mongo ID' })
   public userId!: string;
 
-  @IsMongoId({ message: 'OfferId must be a valid Mongo ID' })
   public offerId!: string;
 }
 

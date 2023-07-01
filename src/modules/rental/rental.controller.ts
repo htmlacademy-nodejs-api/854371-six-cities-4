@@ -1,5 +1,6 @@
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import { inject, injectable } from 'inversify';
+import CheckOwnershipMiddleware from '../../core/middlewares/check-ownership.middleware.js';
 import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
@@ -47,6 +48,7 @@ export default class RentalController extends ControllerAbstract {
       middlewares: [
         new ValidateObjectIdMiddleware('offerId'),
         new DocumentExistMiddleware(rentalService, 'Rental', 'offerId'),
+        new CheckOwnershipMiddleware(rentalService, 'offerId')
       ]
     });
     this.addRoute({
@@ -55,7 +57,8 @@ export default class RentalController extends ControllerAbstract {
       next: this.remove,
       middlewares: [
         new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistMiddleware(rentalService, 'Rental', 'offerId')
+        new DocumentExistMiddleware(rentalService, 'Rental', 'offerId'),
+        new CheckOwnershipMiddleware(rentalService, 'offerId')
       ]
     });
   }
@@ -66,9 +69,9 @@ export default class RentalController extends ControllerAbstract {
     this.ok(res, rentalOffersToResponse);
   }
 
-  public async create({body}: Request<Record<string, unknown>, Record<string, unknown>, CreateRentalDto>,
+  public async create({body, user}: Request<Record<string, unknown>, Record<string, unknown>, CreateRentalDto>,
     res: Response): Promise<void> {
-    const result = await this.rentalService.create(body);
+    const result = await this.rentalService.create({...body, userId: user.id});
     this.created(res, fillDto(RentalAllRdo, result));
   }
 
@@ -78,17 +81,16 @@ export default class RentalController extends ControllerAbstract {
     this.ok(res, rentalToResponse);
   }
 
-  public async edit(req: Request<Record<string, string>, Record<string, unknown>, UpdateRentalDto>, res: Response): Promise<void> {
-    const offerId = req.params.offerId;
-    const body = req.body;
+  public async edit({params, body}: Request<Record<string, string>, Record<string, unknown>, UpdateRentalDto>, res: Response): Promise<void> {
+    const offerId = params.offerId;
 
     const updatedRental = await this.rentalService.findByIdAndUpdate(offerId, body);
     const updatedRentalToResponse = fillDto(RentalAllRdo, updatedRental);
     this.ok(res, updatedRentalToResponse);
   }
 
-  public async remove(req: Request, res: Response): Promise<void> {
-    const offerId = req.params.offerId;
+  public async remove({params}: Request, res: Response): Promise<void> {
+    const offerId = params.offerId;
 
     const deletedRental = await this.rentalService.findByIdAndDelete(offerId);
     const deletedRentalToResponse = fillDto(RentalShortRdo, deletedRental);

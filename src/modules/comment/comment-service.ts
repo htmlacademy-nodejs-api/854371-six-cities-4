@@ -39,8 +39,7 @@ export default class CommentService implements CommentServiceInterface {
     const result = await this.commentModel.create(updatedDto);
     this.logger.info(`createComment: Created a comment for the user with ID ${dto.userId} and the rental listing with ID ${offerId}`);
 
-    const resultToResponse = await this.commentModel.findById(result.id).populate(['userId']);
-    return resultToResponse;
+    return this.commentModel.findById(result.id).populate(['userId']);
   }
 
   public async findCommentsByOfferId(offerId: string, limit?: number): Promise<DocumentType<CommentEntity>[] | null> {

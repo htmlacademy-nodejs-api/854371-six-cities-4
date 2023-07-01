@@ -57,9 +57,9 @@ export default class CommentController extends ControllerAbstract {
     }
   }
 
-  public async create({params, body}: Request<Record<string, string>, Record<string, unknown>, CreateCommentDto>, res: Response) {
+  public async create({params, body, user}: Request<Record<string, string>, Record<string, unknown>, CreateCommentDto>, res: Response) {
     const offerId = params.offerId;
-    const result = await this.commentService.createComment(body, offerId);
+    const result = await this.commentService.createComment({...body, userId: user.id}, offerId);
 
     this.ok(res, fillDto(CommentRdo, result));
   }

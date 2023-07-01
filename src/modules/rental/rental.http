@@ -12,6 +12,7 @@ GET http://localhost:3000/rental-offers/{{$random.alphanumeric(24)}}
 
 POST http://localhost:3000/rental-offers/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pY2hlbGxlQGdvb2dsZS5jb20iLCJpZCI6IjY0OTZmMDg2YWY1NWNjM2VmNjY4ZDVjMiIsImlhdCI6MTY4ODIxMjkwOSwiZXhwIjoxNjg4Mzg1NzA5fQ.gs9n4Pb0VLOrWV8UDffLdc9p3L8gCiHZBTUFrkjaCk4
 
 {
   "title": "{{$random.alphabetic(15)}}",
@@ -27,7 +28,6 @@ Content-Type: application/json
   "guestsCounter": {{$random.integer(10)}},
   "cost": {{$random.integer(10000)}},
   "amenities": ["{{$random.alphanumeric(10)}}", "{{$random.alphanumeric(10)}}", "{{$random.alphanumeric(10)}}"],
-  "userId": "648376b80aef7eea92e327fe",
   "numberComments": {{$random.integer(1000)}},
   "coordinates": {
     "latitude": {{$random.float(5)}},
@@ -37,11 +37,12 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/rental-offers/648f6751572d72678f99d384
+PATCH http://localhost:3000/rental-offers/649a157a948877d3dfb0bd11
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pY2hlbGxlQGdvb2dsZS5jb20iLCJpZCI6IjY0OTZmMDg2YWY1NWNjM2VmNjY4ZDVjMiIsImlhdCI6MTY4ODIxMjkwOSwiZXhwIjoxNjg4Mzg1NzA5fQ.gs9n4Pb0VLOrWV8UDffLdc9p3L8gCiHZBTUFrkjaCk4
 
 {
-  "costtt": 666666
+  "cost": 666666
 }
 
 ###

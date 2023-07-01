@@ -2,7 +2,6 @@ import {
   IsArray,
   IsBoolean,
   IsEnum,
-  IsMongoId,
   IsNumber, IsObject,
   IsString,
   IsUrl,
@@ -60,7 +59,6 @@ export default class CreateRentalDto {
   @IsEnum(Amenity, { message: 'Invalid amenity value', each: true })
   public amenities!: Amenity[];
 
-  @IsMongoId()
   public userId!: string;
 
   @IsObject()
