@@ -51,4 +51,5 @@ export type RentalOffer = {
   user: AutoUserType;
   commentsNumber: number;
   coordinates: Coordinates;
+  postDate: string;
 }

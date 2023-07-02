@@ -117,6 +117,9 @@ export class RentalEntity extends defaultClasses.TimeStamps {
     required: true
   })
   public coordinates!: Coordinates;
+
+  @prop({ default: () => Date.now() })
+  public postDate!: Date;
 }
 
 export const RentalModel = getModelForClass(RentalEntity);

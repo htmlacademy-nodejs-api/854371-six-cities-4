@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { OfferGeneratorInterface } from './offer-generator.interface.js';
 import { MockData } from '../../types/mock-data.js';
 import { getRandomItem, getRandomItems, getRandomValue } from '../../common/utils.js';
@@ -33,11 +34,12 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const username = getRandomItem<string>(this.mockData.users);
     const email = getRandomItem<string>(this.mockData.email);
     const userType = getRandomItem<string>(['base', 'pro']);
+    const postDate = dayjs().toISOString();
 
     return [
       title, description, city, previewUrl, photoUrls, isPremium, isFavorite,
       housingType, roomsCounter, guestsCounter, rentalCost, `${amenities ? amenities : 'Washer'}`, coordinates,
-      username, email, userType,
+      username, email, userType, postDate
     ].join('\t');
   }
 }

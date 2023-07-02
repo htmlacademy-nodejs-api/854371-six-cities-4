@@ -1,6 +1,6 @@
 import {
   IsArray,
-  IsBoolean,
+  IsBoolean, IsDateString,
   IsEnum,
   IsNumber, IsObject,
   IsString,
@@ -64,4 +64,7 @@ export default class CreateRentalDto {
 
   @IsObject()
   public coordinates!: Coordinates;
+
+  @IsDateString({}, {message: 'postDate must be valid ISO date'})
+  public postDate!: string;
 }
