@@ -77,4 +77,6 @@ export default class UpdateRentalDto {
     latitude: number,
     longitude: number
   };
+
+  public userId!: string;
 }

@@ -6,6 +6,7 @@
 /docs/
 /.idea/
 src/test/
+upload
 *.tsv
 
 .DS_Store

@@ -12,6 +12,8 @@ export type RestSchema = {
   DB_PASSWORD: string;
   DB_PORT: number;
   DB_NAME: string;
+  UPLOAD_DIRECTORY: string;
+  JWT_SECRET: string;
 }
 
 export const configurationSchema = convict<RestSchema>({
@@ -55,6 +57,18 @@ export const configurationSchema = convict<RestSchema>({
     doc: 'The secret',
     format: 'String',
     env: 'SALT',
+    default: null
+  },
+  UPLOAD_DIRECTORY: {
+    doc: 'The secret',
+    format: 'String',
+    env: 'UPLOAD_DIRECTORY',
+    default: null
+  },
+  JWT_SECRET: {
+    doc: 'The secret for Jason Web Tokens',
+    format: 'String',
+    env: 'JWT_SECRET',
     default: null
   }
 });

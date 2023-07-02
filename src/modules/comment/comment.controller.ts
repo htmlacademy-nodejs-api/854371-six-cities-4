@@ -5,6 +5,7 @@ import { fillDto } from '../../common/utils.js';
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import DocumentExistMiddleware from '../../core/middlewares/document-exist.middleware.js';
+import PrivateRouteMiddleware from '../../core/middlewares/private-route.middleware.js';
 import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { ValidateObjectIdMiddleware } from '../../core/middlewares/validate-objectId.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
@@ -38,6 +39,7 @@ export default class CommentController extends ControllerAbstract {
       method: HttpMethod.Post,
       next: this.create,
       middlewares: [
+        new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
         new ValidateDtoMiddleware(CreateCommentDto),
         new DocumentExistMiddleware(this.rentalService, 'rental', 'offerId')
@@ -57,9 +59,9 @@ export default class CommentController extends ControllerAbstract {
     }
   }
 
-  public async create({params, body}: Request<Record<string, string>, Record<string, unknown>, CreateCommentDto>, res: Response) {
+  public async create({params, body, user}: Request<Record<string, string>, Record<string, unknown>, CreateCommentDto>, res: Response) {
     const offerId = params.offerId;
-    const result = await this.commentService.createComment(body, offerId);
+    const result = await this.commentService.createComment({...body, userId: user.id}, offerId);
 
     this.ok(res, fillDto(CommentRdo, result));
   }

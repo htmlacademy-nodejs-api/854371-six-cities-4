@@ -1,6 +1,7 @@
 import { LoggerInterface } from '../core/logger/logger.interface.js';
 import { ConfigInterface } from '../core/config/config.interface.js';
 import { inject, injectable } from 'inversify';
+import { AuthenticateMiddleware } from '../core/middlewares/authenticate.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../types/application.dependencies.js';
 import { RestSchema } from '../core/config/rest.schema.js';
 import { DatabaseClientInterface } from '../core/databese-client/database-client.interface.js';
@@ -40,8 +41,9 @@ export default class RestApplication {
     const port = this.config.get('APP_PORT');
 
     this.expressApplication.listen(port);
+    this.expressApplication.disable('x-powered-by');
 
-    this.logger.info(`🚀Server started on http://localhost:${port}/`);
+    this.logger.info(`Server started on http://localhost:${port}/`);
   }
 
   private async _initRouters() {
@@ -54,8 +56,16 @@ export default class RestApplication {
   }
 
   private async _initMiddleware() {
+    const uploadDirectory = this.config.get('UPLOAD_DIRECTORY');
+
     this.logger.info('Global middleware initialization…');
     this.expressApplication.use(express.json());
+    this.expressApplication.use(
+      './upload',
+      express.static(uploadDirectory)
+    );
+    const authenticateMiddleware = new AuthenticateMiddleware(this.config.get('JWT_SECRET'));
+    this.expressApplication.use(authenticateMiddleware.execute.bind(authenticateMiddleware));
     this.logger.info('Global middleware initialization completed');
   }
 

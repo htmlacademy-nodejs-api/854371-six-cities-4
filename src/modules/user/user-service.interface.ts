@@ -1,9 +1,11 @@
+import { DocumentExistsInterface } from '../../types/document-exists.interface.js';
 import CreateUserDto from './dto/create-user.dto.js';
 import { DocumentType } from '@typegoose/typegoose';
+import LoginUserDto from './dto/login-user.dto.js';
 import { UserEntity } from './user.entity.js';
 import UpdateUserDto from './dto/update-user.dto.js';
 
-export interface UserServiceInterface {
+export interface UserServiceInterface extends DocumentExistsInterface {
   /**
    * Создать нового пользователя с данными `dto`
    * @param dto объект с данными пользователя
@@ -30,4 +32,11 @@ export interface UserServiceInterface {
    * @param salt строка для кодирования паролей
    */
   findByEmailAndUpdate(dto: UpdateUserDto, salt: string): Promise<DocumentType<UserEntity> | null>
+
+  /**
+   * Аутентифицировать пользователя
+   * @param dto объект с данными для входа
+   * @param salt строка для кодирования паролей
+   */
+  verifyUser(dto: LoginUserDto, salt: string): Promise<DocumentType<UserEntity> | null>
 }

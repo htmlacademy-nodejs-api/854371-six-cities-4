@@ -1,12 +1,12 @@
-GET http://localhost:3000/comments/123456781234567812345
+GET http://localhost:3000/comments/649a157a948877d3dfb0bd11
 
 ###
 
-POST http://localhost:3000/comments/649a157a948877d3dfb0bdc6
+POST http://localhost:3000/comments/649a157a948877d3dfb0bd11
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1pY2hlbGxlQGdvb2dsZS5jb20iLCJpZCI6IjY0OTZmMDg2YWY1NWNjM2VmNjY4ZDVjMiIsImlhdCI6MTY4ODIxMjkwOSwiZXhwIjoxNjg4Mzg1NzA5fQ.gs9n4Pb0VLOrWV8UDffLdc9p3L8gCiHZBTUFrkjaCk4
 
 {
-  "text": "{{$random.alphabetic(2)}}",
-  "rating": 10,
-  "userId": "6496f086af55cc3ef668d58c"
+  "text": "Test comment very",
+  "rating": 3
 }

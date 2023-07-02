@@ -1,12 +1,14 @@
+import { MAX_RETURNED_OFFERS } from '../../common/const.js';
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
 import { inject, injectable } from 'inversify';
+import CheckOwnershipMiddleware from '../../core/middlewares/check-ownership.middleware.js';
+import PrivateRouteMiddleware from '../../core/middlewares/private-route.middleware.js';
 import ValidateDtoMiddleware from '../../core/middlewares/validate-dto.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import { HttpMethod } from '../../types/http-method.js';
 import { Request, Response } from 'express';
 import RentalService from './rental-service.js';
-import { MAX_RETURNED_OFFERS } from '../../common/const.js';
 import { fillDto } from '../../common/utils.js';
 import RentalShortRdo from './rdo/rental-short.rdo.js';
 import RentalAllRdo from './rdo/rental-all.rdo.js';
@@ -29,7 +31,10 @@ export default class RentalController extends ControllerAbstract {
       path: '/',
       method: HttpMethod.Post,
       next: this.create,
-      middlewares: [new ValidateDtoMiddleware(CreateRentalDto)]
+      middlewares: [
+        new PrivateRouteMiddleware(),
+        new ValidateDtoMiddleware(CreateRentalDto)
+      ]
     });
     this.addRoute({
       path: '/:offerId',
@@ -45,8 +50,10 @@ export default class RentalController extends ControllerAbstract {
       method: HttpMethod.Patch,
       next: this.edit,
       middlewares: [
+        new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
         new DocumentExistMiddleware(rentalService, 'Rental', 'offerId'),
+        new CheckOwnershipMiddleware(rentalService, 'offerId')
       ]
     });
     this.addRoute({
@@ -54,41 +61,55 @@ export default class RentalController extends ControllerAbstract {
       method: HttpMethod.Delete,
       next: this.remove,
       middlewares: [
+        new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistMiddleware(rentalService, 'Rental', 'offerId')
+        new DocumentExistMiddleware(rentalService, 'Rental', 'offerId'),
+        new CheckOwnershipMiddleware(rentalService, 'offerId')
       ]
     });
   }
 
-  public async index(_req: Request, res: Response): Promise<void> {
-    const rentalOffers = await this.rentalService.find(MAX_RETURNED_OFFERS);
+  public async index({query, user}: Request, res: Response): Promise<void> {
+    const limit = query.limit ? query.limit : MAX_RETURNED_OFFERS;
+    const rentalOffers = await this.rentalService.find(+limit);
+
+    if (!user) {
+      for (const rentalOffer of rentalOffers) {
+        rentalOffer.isFavorite = false;
+      }
+    }
+
     const rentalOffersToResponse = fillDto(RentalShortRdo, rentalOffers);
     this.ok(res, rentalOffersToResponse);
   }
 
-  public async create({body}: Request<Record<string, unknown>, Record<string, unknown>, CreateRentalDto>,
+  public async create({body, user}: Request<Record<string, unknown>, Record<string, unknown>, CreateRentalDto>,
     res: Response): Promise<void> {
-    const result = await this.rentalService.create(body);
+    const result = await this.rentalService.create({...body, userId: user.id});
     this.created(res, fillDto(RentalAllRdo, result));
   }
 
-  public async getInfo({params}: Request, res: Response): Promise<void> {
+  public async getInfo({params, user}: Request, res: Response): Promise<void> {
     const rental = await this.rentalService.findById(params.offerId);
+
+    if (!user && rental) {
+      rental.isFavorite = false;
+    }
+
     const rentalToResponse = fillDto(RentalAllRdo, rental);
     this.ok(res, rentalToResponse);
   }
 
-  public async edit(req: Request<Record<string, string>, Record<string, unknown>, UpdateRentalDto>, res: Response): Promise<void> {
-    const offerId = req.params.offerId;
-    const body = req.body;
+  public async edit({params, body}: Request<Record<string, string>, Record<string, unknown>, UpdateRentalDto>, res: Response): Promise<void> {
+    const offerId = params.offerId;
 
     const updatedRental = await this.rentalService.findByIdAndUpdate(offerId, body);
     const updatedRentalToResponse = fillDto(RentalAllRdo, updatedRental);
     this.ok(res, updatedRentalToResponse);
   }
 
-  public async remove(req: Request, res: Response): Promise<void> {
-    const offerId = req.params.offerId;
+  public async remove({params}: Request, res: Response): Promise<void> {
+    const offerId = params.offerId;
 
     const deletedRental = await this.rentalService.findByIdAndDelete(offerId);
     const deletedRentalToResponse = fillDto(RentalShortRdo, deletedRental);

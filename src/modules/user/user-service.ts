@@ -1,3 +1,4 @@
+import LoginUserDto from './dto/login-user.dto.js';
 import { UserServiceInterface } from './user-service.interface.js';
 import CreateUserDto from './dto/create-user.dto.js';
 import { DocumentType, types } from '@typegoose/typegoose';
@@ -11,7 +12,7 @@ import UpdateUserDto from './dto/update-user.dto.js';
 export default class UserService implements UserServiceInterface {
   constructor(
     @inject(APPLICATION_DEPENDENCIES.LoggerInterface) private logger: LoggerInterface,
-    @inject(APPLICATION_DEPENDENCIES.UserModel) private userModel: types.ModelType<UserEntity>
+    @inject(APPLICATION_DEPENDENCIES.UserModel) private userModel: types.ModelType<UserEntity>,
   ) {}
 
   public async create(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>> {
@@ -63,5 +64,26 @@ export default class UserService implements UserServiceInterface {
       this.logger.info(`deleteUser: The user with email ${email} was not found`);
     }
     return result;
+  }
+
+  public async verifyUser(dto: LoginUserDto, salt: string): Promise<DocumentType<UserEntity> | null> {
+    const {email, password} = dto;
+
+    const user = await this.findByEmail(email);
+
+    if (!user) {
+      return null;
+    }
+
+    if (user.verifyPassword(password, salt)) {
+      return user;
+    }
+
+    return null;
+  }
+
+  public async exist(documentId: string): Promise<boolean> {
+    const user = await this.userModel.exists({_id: documentId});
+    return user !== null;
   }
 }

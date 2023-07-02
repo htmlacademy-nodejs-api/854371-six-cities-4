@@ -1,5 +1,7 @@
 import { inject, injectable } from 'inversify';
 import { DEFAULT_OBJECT_TO_RESPONSE } from '../../common/const.js';
+import DocumentExistMiddleware from '../../core/middlewares/document-exist.middleware.js';
+import PrivateRouteMiddleware from '../../core/middlewares/private-route.middleware.js';
 import { APPLICATION_DEPENDENCIES } from '../../types/application.dependencies.js';
 import { LoggerInterface } from '../../core/logger/logger.interface.js';
 import ControllerAbstract from '../../core/controller/controller-abstract.js';
@@ -19,13 +21,17 @@ export default class RentalSpecialController extends ControllerAbstract {
     super(logger);
     this.logger.info('Route registration for special-listings');
 
-    this.addRoute({path: '/', method: HttpMethod.Get, next: this.index});
+    this.addRoute({path: '/', method: HttpMethod.Get, next: this.index, middlewares: [new PrivateRouteMiddleware]});
     this.addRoute({path: '/:city', method: HttpMethod.Get, next: this.getPremiumRentalsByCity});
     this.addRoute({
       path: '/:offerId',
       method: HttpMethod.Post,
       next: this.changeFavoriteStatus,
-      middlewares: [new ValidateObjectIdMiddleware('offerId')]
+      middlewares: [
+        new PrivateRouteMiddleware(),
+        new ValidateObjectIdMiddleware('offerId'),
+        new DocumentExistMiddleware(this.rentalService, 'rental', 'offerId')
+      ]
     });
   }
 
