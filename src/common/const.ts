@@ -47,16 +47,54 @@ export const OfferPriceLimit = {
   MIN: 100,
   MAX: 100000,
 };
-export const OFFER_IMAGES_LIMIT = 6;
 
 export const RatingLimit = {
   MIN: 0,
   MAX: 5
 };
 
+export const RequestedRating = {
+  MIN: 1,
+  MAX: 5
+};
+
+export const CommentTextLength = {
+  MIN: 5,
+  MAX: 1024
+};
+
 export const Field = {
   INCLUDE: 1,
   EXCLUDE: 0
+};
+
+export const ValidationLengths = {
+  TITLE_MIN: 10,
+  TITLE_MAX: 100,
+  DESC_MIN: 20,
+  DESC_MAX: 1024,
+};
+
+export const CountersLimits = {
+  ROOMS_MIN: 1,
+  ROOMS_MAX: 8,
+  GUESTS_MIN: 1,
+  GUESTS_MAX: 10,
+};
+
+export const RentalCostLimits = {
+  MIN: 100,
+  MAX: 100000,
+};
+
+export const NameLength = {
+  MIN: 1,
+  MAX: 15
+};
+
+export const PasswordLength = {
+  MIN: 6,
+  MAX: 12
 };
 
 export const MIN_RANDOM_VALUE = 0;
