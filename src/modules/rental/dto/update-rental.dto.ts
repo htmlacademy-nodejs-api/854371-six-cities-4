@@ -9,19 +9,20 @@ import {
   MaxLength, Min,
   MinLength
 } from 'class-validator';
+import { CountersLimits, RentalCostLimits, ValidationLengths } from '../../../common/const.js';
 import { Amenity, City, HouseType } from '../../../types/rental-offer.js';
 
 export default class UpdateRentalDto {
   @IsOptional()
   @IsString({message: 'Title must be a string'})
-  @MinLength(10, {message: 'Title must be at least 10 characters'})
-  @MaxLength(100, {message: 'Title cannot exceed 100 characters'})
+  @MinLength(ValidationLengths.TITLE_MIN, {message: `Title must be at least ${ValidationLengths.TITLE_MIN} characters`})
+  @MaxLength(ValidationLengths.TITLE_MAX, {message: `Title cannot exceed ${ValidationLengths.TITLE_MAX} characters`})
   public title?: string;
 
   @IsOptional()
   @IsString({message: 'Description must be a string'})
-  @MinLength(20, {message: 'Description must be at least 20 characters'})
-  @MaxLength(1024, {message: 'Description cannot exceed 1024 characters'})
+  @MinLength(ValidationLengths.DESC_MIN, {message: `Description must be at least ${ValidationLengths.DESC_MIN} characters`})
+  @MaxLength(ValidationLengths.DESC_MAX, {message: `Description cannot exceed ${ValidationLengths.DESC_MAX} characters`})
 
   public description?: string;
 
@@ -51,20 +52,20 @@ export default class UpdateRentalDto {
 
   @IsOptional()
   @IsNumber({}, {message: 'Rooms counter must be a number'})
-  @Min(1, {message: 'Rooms counter must be at least 1'})
-  @Max(8, {message: 'Rooms counter cannot exceed 8'})
+  @Min(CountersLimits.ROOMS_MIN, {message: `Rooms counter must be at least ${CountersLimits.ROOMS_MIN}`})
+  @Max(CountersLimits.ROOMS_MAX, {message: `Rooms counter cannot exceed ${CountersLimits.ROOMS_MAX}`})
   public roomsCounter?: number;
 
   @IsOptional()
   @IsNumber({}, {message: 'Guests counter must be a number'})
-  @Min(1, {message: 'Guests counter must be at least 1'})
-  @Max(10, {message: 'Guests counter cannot exceed 10'})
+  @Min(CountersLimits.GUESTS_MIN, {message: `Guests counter must be at least ${CountersLimits.GUESTS_MIN}`})
+  @Max(CountersLimits.GUESTS_MAX, {message: `Guests counter cannot exceed ${CountersLimits.GUESTS_MAX}`})
   public guestsCounter?: number;
 
   @IsOptional()
   @IsNumber()
-  @Min(100)
-  @Max(100000)
+  @Min(RentalCostLimits.MIN)
+  @Max(RentalCostLimits.MAX)
   public rentalCost!: number;
 
   @IsOptional()

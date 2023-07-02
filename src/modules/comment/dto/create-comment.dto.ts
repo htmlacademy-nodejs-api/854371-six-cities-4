@@ -1,14 +1,15 @@
 import { IsNumber, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
+import { CommentTextLength, RequestedRating } from '../../../common/const.js';
 
 export default class CreateCommentDto {
   @IsString({ message: 'Text must be a string' })
-  @MinLength(5, { message: 'Text must be at least 5 characters' })
-  @MaxLength(1024, { message: 'Text cannot exceed 1024 characters' })
+  @MinLength(CommentTextLength.MIN, { message: `Text must be at least ${CommentTextLength.MIN} characters` })
+  @MaxLength(CommentTextLength.MAX, { message: `Text cannot exceed ${CommentTextLength.MAX} characters` })
   public text!: string;
 
   @IsNumber()
-  @Min(1, { message: 'Rating must be at least 1' })
-  @Max(5, { message: 'Rating cannot exceed 5' })
+  @Min(RequestedRating.MIN, { message: `Rating must be at least ${RequestedRating.MIN}` })
+  @Max(RequestedRating.MAX, { message: `Rating cannot exceed ${RequestedRating.MAX}` })
   public rating!: number;
 
   public userId!: string;

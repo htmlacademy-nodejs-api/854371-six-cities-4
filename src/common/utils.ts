@@ -5,18 +5,23 @@ export function getRandomValue(min: number, max: number): number {
   return Math.round(Math.random() * (max - min)) + min;
 }
 
+const START_INDEX_OFFSET = 1;
+const END_INDEX_OFFSET = -1;
+const FIRST_INDEX = 0;
+
 export function getRandomItems<T>(items: T[]): T[] {
-  const start = getRandomValue(1, items.length - 1);
-  const end = getRandomValue(start + 1, items.length - 1);
+  const start = getRandomValue(START_INDEX_OFFSET, items.length + END_INDEX_OFFSET);
+  const end = getRandomValue(start + START_INDEX_OFFSET, items.length + END_INDEX_OFFSET);
 
   return items.slice(start, end);
 }
 
 export function getRandomItem<T>(items: T[]): T {
-  const index = getRandomValue(0, items.length - 1);
+  const index = getRandomValue(FIRST_INDEX, items.length + END_INDEX_OFFSET);
 
   return items[index];
 }
+
 
 export function getErrorMessage(error: unknown) {
   if (error instanceof Error) {
